@@ -24,8 +24,9 @@ export default function Footer() {
         </div>
         <div className={styles.col}>
           <div className="lbl">Connect</div>
-          <a href={site.linkedin}>[LinkedIn]</a>
-          <a href={site.instagram}>[Instagram]</a>
+          <a href={site.linkedin}>LinkedIn</a>
+          <a href={site.instagram}>Instagram</a>
+          <a href={site.github}>GitHub</a>
           <a href={`mailto:${site.email}`}>Email</a>
         </div>
       </div>
