@@ -53,3 +53,12 @@
   height: 100%;
   border: 0;
 }
+
+/* Tile takes the logo's own shape at full height, so nothing is letterboxed. */
+.fit {
+  flex: 0 0 auto;
+}
+.fit .img {
+  width: auto;
+  height: 100%;
+}

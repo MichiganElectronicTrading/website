@@ -16,6 +16,8 @@ const MIN_TILES = 8;
 type Props = {
   rows: Row[];
   label: string;
+  /** Size each tile to its logo so the logo fills it edge to edge. */
+  fill?: boolean;
 };
 
 /**
@@ -23,7 +25,7 @@ type Props = {
  * seamless; hovering pauses every row, and reduced motion stops them.
  * Repeated tiles are hidden from screen readers.
  */
-export default function LogoMarquee({ rows, label }: Props) {
+export default function LogoMarquee({ rows, label, fill }: Props) {
   const visible = rows.filter((row) => row.logos.length > 0);
   if (visible.length === 0) return null;
 
@@ -41,7 +43,11 @@ export default function LogoMarquee({ rows, label }: Props) {
               .map((firm, j) => {
                 const repeat = copy || j >= row.logos.length;
                 return (
-                  <div key={`${copy}-${j}`} className={styles.mq} aria-hidden={repeat || undefined}>
+                  <div
+                    key={`${copy}-${j}`}
+                    className={`${styles.mq} ${fill && firm.logo ? styles.fit : ""}`}
+                    aria-hidden={repeat || undefined}
+                  >
                     {firm.logo ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={firm.logo} alt={repeat ? "" : firm.name} className={styles.img} />
