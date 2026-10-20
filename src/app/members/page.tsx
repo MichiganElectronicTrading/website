@@ -11,7 +11,6 @@ import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Members" };
 
-const half = Math.ceil(placements.length / 2);
 const label = numberSections(["The Board", "Desk Heads", "All members", placements.length > 0 && "Member Placements"]);
 
 export default function MembersPage() {
@@ -88,10 +87,7 @@ export default function MembersPage() {
           </div>
           <LogoMarquee
             label="Firms where members have interned or worked, auto-scrolling"
-            rows={[
-              { logos: placements.slice(0, half), duration: 36, reverse: true },
-              { logos: placements.slice(half), duration: 30 },
-            ]}
+            rows={[{ logos: placements, duration: 60 }]}
           />
         </Section>
       )}

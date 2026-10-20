@@ -46,3 +46,10 @@
   height: 60%;
   object-fit: contain;
 }
+
+/* Placeholder box fills the tile; the tile already draws the border. */
+.mq .ph {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

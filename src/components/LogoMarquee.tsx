@@ -1,4 +1,5 @@
 import type { FirmLogo } from "@/data/logos";
+import Placeholder from "./Placeholder";
 import styles from "./LogoMarquee.module.css";
 
 type Row = {
@@ -31,10 +32,14 @@ export default function LogoMarquee({ rows, label }: Props) {
           style={{ animationDuration: `${row.duration}s` }}
         >
           {[false, true].map((copy) =>
-            row.logos.map((firm) => (
-              <div key={`${copy}-${firm.logo}`} className={styles.mq} aria-hidden={copy || undefined}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={firm.logo} alt={copy ? "" : firm.name} className={styles.img} />
+            row.logos.map((firm, j) => (
+              <div key={`${copy}-${j}`} className={styles.mq} aria-hidden={copy || undefined}>
+                {firm.logo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={firm.logo} alt={copy ? "" : firm.name} className={styles.img} />
+                ) : (
+                  <Placeholder label="[FIRM LOGO]" className={styles.ph} />
+                )}
               </div>
             )),
           )}

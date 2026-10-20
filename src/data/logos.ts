@@ -1,7 +1,7 @@
 export type FirmLogo = {
   name: string;
-  /** Path under /public. */
-  logo: string;
+  /** Path under /public. Leave out to show a "[FIRM LOGO]" box until the real logo is in. */
+  logo?: string;
   /** Made-up firm used only to show the layout. Dropped from production builds. */
   placeholder?: boolean;
 };
