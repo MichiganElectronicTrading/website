@@ -54,5 +54,4 @@ export const faq = [
   { q: "Do I need trading experience?", a: "No. New members go through a weekly education program that covers the basics." },
   { q: "Can freshmen apply?", a: "Yes. All years and majors can apply." },
   { q: "Can I apply to both tracks?", a: "Pick one when you apply. Desks mix both tracks, so you'll work with the other side either way." },
-  { q: "How much time does it take?", a: "Expect about [X] hours a week between desk work and meetings." },
 ];
