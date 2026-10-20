@@ -3,7 +3,7 @@ import Link from "next/link";
 import Section, { SectionLabel, numberSections } from "@/components/Section";
 import StageCards from "@/components/StageCards";
 import LogoMarquee from "@/components/LogoMarquee";
-import AboutChip from "@/components/AboutChip";
+import LiveChip from "@/components/LiveChip";
 import HomeJoin from "@/components/HomeJoin";
 import MetMark from "@/components/MetMark";
 import { allSponsors } from "@/data/sponsors";
@@ -47,7 +47,7 @@ export default function Home() {
               custom AI models, or alternative data, we build our own solutions to hard market problems.
             </p>
           </div>
-          <AboutChip />
+          <LiveChip />
         </div>
       </Section>
 

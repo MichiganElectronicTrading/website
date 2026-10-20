@@ -1,0 +1,43 @@
+.wrap {
+  flex: 0 0 560px;
+  width: 560px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Same 560×440 slot as the static illustration, scaled with its container. */
+.stage {
+  width: 100%;
+  aspect-ratio: 560 / 440;
+  background: var(--cream);
+  cursor: crosshair;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.toggle {
+  align-self: flex-end;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.toggle:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
