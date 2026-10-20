@@ -12,7 +12,7 @@ export const recruiting = {
   status: "closed" as "open" | "closed",
   term: "Winter 2027",
   /** External form links. The site never collects data itself. */
-  notifyUrl: "#",
+  notifyUrl: "https://forms.gle/kD5T8UcvgUeQnxcc8",
   applyUrl: "#",
   /** Shown on Home while open. */
   closesDate: "[DATE]",

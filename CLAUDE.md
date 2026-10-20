@@ -34,7 +34,7 @@ Sections alternate cream, then off-white, then light grey, as in the designs.
 - **Sponsors.**
   - Sponsor sections and the Home sponsor strip render nothing when the sponsor list is empty.
   - Placeholder logos are marked `placeholder: true` in data and must never reach production.
-- **Forms are external links** (Get Notified, Apply). The site never collects data itself.
+- **Forms are external links** (Register Interest, Apply). The site never collects data itself.
 - **Motion:**
   - Scrolling logo strips pause on hover.
   - All animation stops under `prefers-reduced-motion`.

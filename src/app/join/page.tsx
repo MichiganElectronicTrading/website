@@ -26,7 +26,7 @@ export default function JoinPage() {
             rel="noopener"
             className={`btn fill ${styles.start}`}
           >
-            {open ? "Apply" : "Get Notified"}
+            {open ? "Apply" : "Register Interest"}
           </a>
         }
       />

@@ -30,7 +30,7 @@ export default function HomeJoin({ label }: { label: string }) {
           )}
           <div className={styles.actions}>
             <a href={open ? recruiting.applyUrl : recruiting.notifyUrl} target="_blank" rel="noopener" className="btn fill">
-              {open ? "Apply" : "Get Notified"}
+              {open ? "Apply" : "Register Interest"}
             </a>
             <Link href="/join" className={styles.how}>
               How recruiting works →
