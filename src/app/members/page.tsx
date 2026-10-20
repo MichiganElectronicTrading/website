@@ -87,7 +87,7 @@ export default function MembersPage() {
           </div>
           <LogoMarquee
             label="Firms where members have interned or worked, auto-scrolling"
-            rows={[{ logos: placements, duration: 60 }]}
+            rows={[{ logos: placements, duration: 45 }]}
           />
         </Section>
       )}

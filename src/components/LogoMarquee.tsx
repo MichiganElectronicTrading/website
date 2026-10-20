@@ -10,6 +10,9 @@ type Row = {
   reverse?: boolean;
 };
 
+/** Short rows repeat until they have this many tiles, so the loop fills wide screens. */
+const MIN_TILES = 8;
+
 type Props = {
   rows: Row[];
   label: string;
@@ -18,6 +21,7 @@ type Props = {
 /**
  * Auto-scrolling logo strip. Each row is rendered twice so the loop is
  * seamless; hovering pauses every row, and reduced motion stops them.
+ * Repeated tiles are hidden from screen readers.
  */
 export default function LogoMarquee({ rows, label }: Props) {
   const visible = rows.filter((row) => row.logos.length > 0);
@@ -32,16 +36,21 @@ export default function LogoMarquee({ rows, label }: Props) {
           style={{ animationDuration: `${row.duration}s` }}
         >
           {[false, true].map((copy) =>
-            row.logos.map((firm, j) => (
-              <div key={`${copy}-${j}`} className={styles.mq} aria-hidden={copy || undefined}>
-                {firm.logo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={firm.logo} alt={copy ? "" : firm.name} className={styles.img} />
-                ) : (
-                  <Placeholder label="[FIRM LOGO]" className={styles.ph} />
-                )}
-              </div>
-            )),
+            Array.from({ length: Math.max(1, Math.ceil(MIN_TILES / row.logos.length)) }, () => row.logos)
+              .flat()
+              .map((firm, j) => {
+                const repeat = copy || j >= row.logos.length;
+                return (
+                  <div key={`${copy}-${j}`} className={styles.mq} aria-hidden={repeat || undefined}>
+                    {firm.logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={firm.logo} alt={repeat ? "" : firm.name} className={styles.img} />
+                    ) : (
+                      <Placeholder label="[FIRM LOGO]" className={styles.ph} />
+                    )}
+                  </div>
+                );
+              }),
           )}
         </div>
       ))}
