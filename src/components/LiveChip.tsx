@@ -1,28 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { createChipScene } from "./liveChipScene";
 import styles from "./LiveChip.module.css";
 
 /*
  * Animated chip illustration for Home's About section. The canvas is
- * decorative; the toggle below it pauses and resumes the motion.
- * "still" is the reduced-motion start: one frame, nothing played yet.
+ * decorative. Under reduced motion it draws one still frame.
  */
-
-type Mode = "running" | "paused" | "still";
-
-const LABELS: Record<Mode, string> = {
-  running: "Pause motion",
-  paused: "Resume motion",
-  still: "Play motion",
-};
 
 export default function LiveChip() {
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const toggleRef = useRef<() => void>(() => {});
-  const [mode, setMode] = useState<Mode>("running");
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -46,7 +35,7 @@ export default function LiveChip() {
       scene.step(dt);
       raf = requestAnimationFrame(frame);
     };
-    // Run the loop only while unpaused, on screen and in a visible tab.
+    // Run the loop only without reduced motion, on screen and in a visible tab.
     const sync = () => {
       const run = !paused && onScreen && !document.hidden;
       if (run && !raf) {
@@ -59,25 +48,12 @@ export default function LiveChip() {
     };
 
     scene.resize();
-    if (paused) {
-      setMode("still");
-      scene.still();
-    } else {
-      scene.redraw();
-    }
-
-    toggleRef.current = () => {
-      paused = !paused;
-      setMode(paused ? "paused" : "running");
-      sync();
-    };
+    if (paused) scene.still();
+    else scene.redraw();
 
     const onMotionChange = () => {
-      if (motion.matches && !paused) {
-        paused = true;
-        setMode("still");
-        sync();
-      }
+      paused = motion.matches;
+      sync();
     };
     motion.addEventListener("change", onMotionChange);
 
@@ -116,7 +92,6 @@ export default function LiveChip() {
       alive = false;
       cancelAnimationFrame(raf);
       raf = 0;
-      toggleRef.current = () => {};
       motion.removeEventListener("change", onMotionChange);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
@@ -134,14 +109,6 @@ export default function LiveChip() {
       <div ref={stageRef} className={styles.stage}>
         <canvas ref={canvasRef} aria-hidden="true" className={styles.canvas} />
       </div>
-      <button
-        type="button"
-        className={styles.toggle}
-        aria-pressed={mode !== "running"}
-        onClick={() => toggleRef.current()}
-      >
-        {LABELS[mode]}
-      </button>
     </div>
   );
 }
