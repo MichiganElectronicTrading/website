@@ -1,0 +1,31 @@
+.pill {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--ink);
+  padding: 6px 14px;
+}
+.onDark { border-color: #fff; }
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 8px;
+}
+.closedLight { background: #8a8a8a; }
+.closedDark { background: #9aa3ae; }
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(192, 143, 18, 0.55); }
+  70% { box-shadow: 0 0 0 7px rgba(192, 143, 18, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(192, 143, 18, 0); }
+}
+.live {
+  background: var(--gold-text-2);
+  animation: pulse 1.8s ease-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .live { animation: none; }
+}

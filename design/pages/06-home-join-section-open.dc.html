@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home · Join, applications open</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F4EFE4;color:#111;font-family:"Red Hat Text",ui-sans-serif,system-ui,sans-serif}
+a{color:#111}a:hover{color:#555}
+.lbl{font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.sec{font-size:20px;letter-spacing:.07em;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border:1.5px solid #111;text-decoration:none;font-size:14px;font-weight:600;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{color:#111;background:#eee}
+.fill{background:#111;color:#fff}
+.fill:hover{background:#333;color:#fff}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;border:1.5px solid #111;padding:6px 14px}
+.dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(192,143,18,.55)}70%{box-shadow:0 0 0 7px rgba(192,143,18,0)}100%{box-shadow:0 0 0 0 rgba(192,143,18,0)}}
+.dot.live{animation:pulse 1.8s ease-out infinite}
+@media (prefers-reduced-motion: reduce){.dot.live{animation:none}}
+h1,h2,h3,.hf{font-family:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em}
+</style>
+</helmet>
+<div style="min-width:0">
+
+<section id="join" style="padding:96px 0;background:#F4EFE4">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">04 — Join</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+<div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<div class="lbl pill"><span class="dot live" style="background:#C08F12"></span>Applications open</div>
+<h2 style="margin:0;font-size:36px;line-height:1.15">Applications Are Open</h2>
+<p style="margin:0;font-size:17px;line-height:1.6">Winter 2027 applications close [DATE]. Every applicant hears back by [DATE].</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+<a href="#" target="_blank" rel="noopener" class="btn fill">Apply</a>
+<a href="/join" style="font-size:15px;font-weight:600">How recruiting works →</a>
+</div>
+</div>
+<div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:12px">
+<span class="lbl" style="color:#555">Winter 2027 recruiting</span>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:12px">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+<li style="{{s.style}}" aria-current="{{s.current}}">
+<span class="lbl" style="{{s.nstyle}}">{{s.n}}</span>
+<span style="font-weight:600">{{s.name}}</span>
+<span class="lbl" style="{{s.dstyle}}">{{s.date}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":560}}'>
+class Component extends DCLogic {
+renderVals() {
+const base = 'flex:1 1 90px;min-width:0;border:1.5px solid #111;padding:18px;display:flex;flex-direction:column;gap:8px';
+const steps = [
+{ n: '01', name: 'Winterfest', date: '[DATE]', past: true },
+{ n: '02', name: 'Mass Meeting', date: '[DATE]', past: true },
+{ n: '03', name: 'Application', date: 'Due [DATE]', now: true },
+{ n: '04', name: 'Interviews', date: '[DATE]' }
+].map((s) => ({
+...s,
+n: s.now ? s.n + ' · Now' : s.n,
+current: s.now ? 'step' : 'false',
+style: base + (s.now ? ';background:#0B1B33;border-color:#0B1B33;color:#fff' : s.past ? ';opacity:.5' : ''),
+nstyle: s.now ? 'color:#D9A21B' : '',
+dstyle: s.now ? 'color:rgba(255,255,255,.75)' : 'color:#555'
+}));
+return { steps };
+}
+}
+</script>
+</body>
+</html>

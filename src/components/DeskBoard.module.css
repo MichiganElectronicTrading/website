@@ -1,0 +1,54 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.card {
+  flex: 1 1 320px;
+  min-width: 0;
+  border: 1.5px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.visual {
+  height: 170px;
+  border: none;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.body p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.titleRow h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.badge {
+  border: 1.5px solid var(--ink);
+  padding: 4px 10px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}

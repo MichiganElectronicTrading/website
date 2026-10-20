@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Members — design</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:"Red Hat Text",ui-sans-serif,system-ui,sans-serif}
+a{color:#111}a:hover{color:#555}
+.ph{position:relative;border:1.5px solid #111;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box}
+.ph svg{position:absolute;inset:0;width:100%;height:100%}
+.ph span{position:relative;background:#fff;padding:2px 8px;font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.06em;text-align:center}
+.lbl{font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.sec{font-size:20px;letter-spacing:.07em;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border:1.5px solid #111;text-decoration:none;font-size:14px;font-weight:600;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{color:#111;background:#eee}
+.fill{background:#111;color:#fff}
+.fill:hover{background:#333;color:#fff}
+.dark{background:#0B1B33;color:#fff}
+.dark a{color:#fff}.dark a:hover{color:#D9DEE6}
+.dark .btn{border-color:#fff;color:#fff;background:transparent}
+.dark .btn:hover{background:rgba(255,255,255,.12);color:#fff}
+.dark .fill{background:#fff;color:#0B1B33}
+.dark .fill:hover{background:#E6E9EE;color:#0B1B33}
+.dark .ph{border-color:#fff;background:transparent}
+.dark .ph span{background:#0B1B33;color:#fff}
+.dark svg line{stroke:rgba(255,255,255,.35)}
+.dark input::placeholder{color:rgba(255,255,255,.6)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.track.rev{animation-direction:reverse}
+.marquee:hover .track{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){.track{animation:none}}
+.mq{flex:0 0 200px;height:88px;margin-right:16px;display:flex;align-items:center;justify-content:center;border:1.5px solid #111;background:#fff;box-sizing:border-box}
+h1,h2,h3,.hf{font-family:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em}
+</style>
+</helmet>
+<div style="min-width:0">
+
+<header class="dark">
+<div style="max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+<a href="/" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;text-decoration:none"><svg viewBox="263 360 1074 880" width="42" height="34" aria-hidden="true" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg><span class="hf" style="font-size:17px;font-weight:600">Michigan Electronic Trading</span></a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:24px;font-size:15px">
+<a href="/desks">Desks</a>
+<a href="/sponsors">Sponsors</a>
+<a href="/members" style="font-weight:700;text-decoration:underline" aria-current="page">Members</a>
+<a href="/join" class="btn">Join</a>
+</nav>
+</div>
+</header>
+
+<section class="dark" style="padding:80px 0 56px">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:20px">
+<h1 style="margin:0;font-size:56px;line-height:1.05">Members</h1>
+<p style="margin:0;font-size:18px;line-height:1.5;max-width:620px">MET is made up of traders and engineers from across the University of Michigan.</p>
+</div>
+</section>
+
+<section style="padding:72px 0;background:#F4EFE4">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">01 — The Board</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:24px">
+<article style="flex:1 1 300px;min-width:0;border:1.5px solid #111;display:flex;flex-direction:column">
+<img src="../assets/headshot-david-smith.jpg" alt="David Smith" style="display:block;width:100%;aspect-ratio:1 / 1;height:auto;object-fit:cover;object-position:50% 30%;border-bottom:1.5px solid #111">
+<div style="padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="margin:0;font-size:22px">David Smith</h3>
+<span style="font-size:16px;font-weight:600">Director of Trading</span>
+<span class="lbl" style="color:#555">Founding Partner</span>
+<span style="font-size:15px;line-height:1.5;color:#444">B.S.E. Computer Science · 2029</span>
+<a href="https://www.linkedin.com/in/-davidjamessmith" target="_blank" rel="noopener" style="font-size:14px;font-weight:600">LinkedIn →</a>
+</div>
+</article>
+<sc-for list="{{partners}}" as="p" hint-placeholder-count="2">
+<article style="flex:1 1 300px;min-width:0;border:1.5px solid #111;display:flex;flex-direction:column">
+<div class="ph" style="width:100%;aspect-ratio:1 / 1;border:none;border-bottom:1.5px solid #111"><svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#111" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="100" y1="0" x2="0" y2="100" stroke="#111" stroke-width="1" vector-effect="non-scaling-stroke"></line></svg><span>[HEADSHOT]</span></div>
+<div style="padding:24px;display:flex;flex-direction:column;gap:8px">
+<h3 style="margin:0;font-size:22px">[Name]</h3>
+<span style="font-size:16px;font-weight:600">{{p.role}}</span>
+<span class="lbl" style="color:#555">Founding Partner</span>
+<span style="font-size:15px;line-height:1.5;color:#444">[Year · major]</span>
+<a href="#" style="font-size:14px;font-weight:600">[LinkedIn →]</a>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="padding:72px 0;border-top:1.5px solid #111;background:#FAF8F3">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">02 — Desk Heads</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:20px">
+<sc-for list="{{heads}}" as="h" hint-placeholder-count="4">
+<article style="flex:1 1 240px;min-width:0;border:1.5px solid #111;display:flex;flex-direction:column">
+<div class="ph" style="width:100%;aspect-ratio:1 / 1;border:none;border-bottom:1.5px solid #111"><svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#111" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="100" y1="0" x2="0" y2="100" stroke="#111" stroke-width="1" vector-effect="non-scaling-stroke"></line></svg><span>[HEADSHOT]</span></div>
+<div style="padding:20px;display:flex;flex-direction:column;gap:6px">
+<h3 style="margin:0;font-size:18px">[Name]</h3>
+<span class="lbl">[Desk name] · Head</span>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="padding:72px 0;border-top:1.5px solid #111;background:#ECEBE7">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">03 — All members</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div role="group" aria-label="Filter members" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="3">
+<button type="button" class="btn" style="{{f.style}}" onClick="{{f.pick}}">{{f.label}}</button>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0;border:1.5px solid #111">
+<sc-for list="{{shown}}" as="m" hint-placeholder-count="12">
+<article style="position:relative;aspect-ratio:3 / 4;background:#C9C8C3;overflow:hidden">
+<svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><line x1="0" y1="0" x2="100" y2="100" stroke="#A3A29D" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="100" y1="0" x2="0" y2="100" stroke="#A3A29D" stroke-width="1" vector-effect="non-scaling-stroke"></line></svg>
+<span class="lbl" aria-hidden="true" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#4A4A46">[Photo]</span>
+<h3 style="position:absolute;top:14px;left:14px;right:14px;margin:0;text-align:right;color:#fff;font-size:17px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,0.6)">[Name]</h3>
+<div style="position:absolute;bottom:14px;left:14px;right:14px;display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.6)">
+<span style="font-size:15px;font-weight:700">{{m.track}}</span>
+<span style="font-size:14px;color:rgba(255,255,255,0.9)">[Desk name]</span>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section style="padding:72px 0;border-top:1.5px solid #111;background:#F4EFE4">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">04 — Member Placements</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+</div>
+<div class="marquee" aria-label="Firms where members have interned or worked, auto-scrolling" style="overflow:hidden;margin-top:32px;border-top:1.5px solid #111;border-bottom:1.5px solid #111;padding:20px 0;display:flex;flex-direction:column;gap:16px">
+<div class="track rev" style="animation-duration:36s">
+<div class="mq"><img src="../assets/placeholder-logos/corvane.svg" alt="Corvane" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/meridale.svg" alt="Meridale Securities" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/quillon.svg" alt="Quillon" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/fernhook.svg" alt="Fernhook" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/kelderwick.svg" alt="Kelderwick" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/novaro.svg" alt="Novaro Labs" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/corvane.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/meridale.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/quillon.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/fernhook.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/kelderwick.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/novaro.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+</div>
+<div class="track" style="animation-duration:30s">
+<div class="mq"><img src="../assets/placeholder-logos/vantrel.svg" alt="Vantrel Capital" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/orrin-hale.svg" alt="Orrin &amp; Hale" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/pinewire.svg" alt="Pinewire Trading" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/lumabit.svg" alt="Lumabit" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/arclane.svg" alt="Arclane Markets" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/tessaline.svg" alt="Tessaline Systems" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/vantrel.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/orrin-hale.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/pinewire.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/lumabit.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/arclane.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/tessaline.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+</div>
+</div>
+</section>
+
+<footer class="dark">
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px;display:flex;flex-wrap:wrap;gap:48px">
+<div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="263 360 1074 880" width="68" height="56" role="img" aria-label="Logo" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg>
+<div class="hf" style="font-size:18px;font-weight:600">Michigan Electronic Trading</div>
+<div style="font-size:14px;color:rgba(255,255,255,.75)">A University of Michigan student organization driving innovation at the intersection of markets, technology, and hardware.</div>
+<a href="mailto:michigan-electronic-trading@umich.edu" style="font-size:14px">michigan-electronic-trading@umich.edu</a>
+</div>
+<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<div class="lbl">Pages</div>
+<a href="/desks">Desks</a><a href="/sponsors">Sponsors</a><a href="/members">Members</a><a href="/join">Join</a>
+</div>
+<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<div class="lbl">Connect</div>
+<a href="#">[LinkedIn]</a><a href="#">[Instagram]</a><a href="mailto:michigan-electronic-trading@umich.edu">Email</a>
+</div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,.25);padding:16px 24px;text-align:center;font-size:12px;color:rgba(255,255,255,.7)">© 2026 Michigan Electronic Trading · [Independent student organization disclaimer]</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":3400}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { filter: 'All' }; }
+renderVals() {
+const all = ['Trading', 'Engineering', 'Trading', 'Engineering', 'Engineering', 'Trading', 'Trading', 'Engineering', 'Trading', 'Engineering', 'Trading', 'Engineering'].map((track) => ({ track }));
+const f = this.state.filter;
+return {
+partners: [{ role: 'Director of Engineering' }, { role: 'Director of Technology' }],
+heads: [1, 2, 3, 4],
+filters: ['All', 'Trading', 'Engineering'].map((label) => ({
+label,
+style: label === f ? 'background:#111;color:#fff' : '',
+pick: () => this.setState({ filter: label })
+})),
+shown: f === 'All' ? all : all.filter((m) => m.track === f)
+};
+}
+}
+</script>
+</body>
+</html>

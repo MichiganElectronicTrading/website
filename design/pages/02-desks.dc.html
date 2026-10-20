@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Desks — design</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:"Red Hat Text",ui-sans-serif,system-ui,sans-serif}
+a{color:#111}a:hover{color:#555}
+.ph{position:relative;border:1.5px solid #111;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box}
+.ph svg{position:absolute;inset:0;width:100%;height:100%}
+.ph span{position:relative;background:#fff;padding:2px 8px;font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.06em;text-align:center}
+.lbl{font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.sec{font-size:20px;letter-spacing:.07em;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border:1.5px solid #111;text-decoration:none;font-size:14px;font-weight:600;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{color:#111;background:#eee}
+.fill{background:#111;color:#fff}
+.fill:hover{background:#333;color:#fff}
+.dark{background:#0B1B33;color:#fff}
+.dark a{color:#fff}.dark a:hover{color:#D9DEE6}
+.dark .btn{border-color:#fff;color:#fff;background:transparent}
+.dark .btn:hover{background:rgba(255,255,255,.12);color:#fff}
+.dark .fill{background:#fff;color:#0B1B33}
+.dark .fill:hover{background:#E6E9EE;color:#0B1B33}
+.dark .ph{border-color:#fff;background:transparent}
+.dark .ph span{background:#0B1B33;color:#fff}
+.dark svg line{stroke:rgba(255,255,255,.35)}
+.dark input::placeholder{color:rgba(255,255,255,.6)}
+h1,h2,h3,.hf{font-family:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em}
+</style>
+</helmet>
+<div style="min-width:0">
+
+<header class="dark">
+<div style="max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+<a href="/" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;text-decoration:none"><svg viewBox="263 360 1074 880" width="42" height="34" aria-hidden="true" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg><span class="hf" style="font-size:17px;font-weight:600">Michigan Electronic Trading</span></a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:24px;font-size:15px">
+<a href="/desks" style="font-weight:700;text-decoration:underline" aria-current="page">Desks</a>
+<a href="/sponsors">Sponsors</a>
+<a href="/members">Members</a>
+<a href="/join" class="btn">Join</a>
+</nav>
+</div>
+</header>
+
+<section class="dark" style="padding:80px 0 56px">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:20px">
+<h1 style="margin:0;font-size:56px;line-height:1.05">Desks</h1>
+<p style="margin:0;font-size:18px;line-height:1.5;max-width:620px">Every project at MET runs through a desk. Each desk is a small team of traders and engineers led by a desk head.</p>
+</div>
+</section>
+
+<section style="padding:72px 0;background:#F4EFE4">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">01 — How desks work</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+<sc-for list="{{stages}}" as="s" hint-placeholder-count="3">
+<li style="flex:1 1 240px;border:1.5px solid #111;padding:28px;display:flex;flex-direction:column;gap:10px">
+<span class="lbl">{{s.n}} →</span>
+<span class="hf" style="font-size:20px;font-weight:600">{{s.name}}</span>
+<span style="font-size:15px;line-height:1.5;color:#444">{{s.desc}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<section style="padding:72px 0;border-top:1.5px solid #111;background:#FAF8F3">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">02 — All desks</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div role="group" aria-label="Filter desks" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="3">
+<button type="button" class="btn" style="{{f.style}}" onClick="{{f.pick}}">{{f.label}}</button>
+</sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:24px">
+<sc-for list="{{shown}}" as="d" hint-placeholder-count="6">
+<article style="flex:1 1 320px;min-width:0;border:1.5px solid #111;display:flex;flex-direction:column">
+<div class="ph" style="height:170px;border:none;border-bottom:1.5px solid #111"><svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="0" x2="100" y2="100" stroke="#111" stroke-width="1" vector-effect="non-scaling-stroke"></line><line x1="100" y1="0" x2="0" y2="100" stroke="#111" stroke-width="1" vector-effect="non-scaling-stroke"></line></svg><span>[DESK VISUAL]</span></div>
+<div style="padding:24px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+<h3 style="margin:0;font-size:20px">[Desk name]</h3>
+<span class="lbl" style="border:1.5px solid #111;padding:4px 10px">{{d.badge}}</span>
+</div>
+<p style="margin:0;font-size:15px;line-height:1.5;color:#444">[Two lines on the desk's strategy or project.]</p>
+<div style="display:flex;flex-wrap:wrap;gap:16px" class="lbl">
+<span>Head: [Name]</span>
+<span>[N] trading · [N] eng</span>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<footer class="dark">
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px;display:flex;flex-wrap:wrap;gap:48px">
+<div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="263 360 1074 880" width="68" height="56" role="img" aria-label="Logo" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg>
+<div class="hf" style="font-size:18px;font-weight:600">Michigan Electronic Trading</div>
+<div style="font-size:14px;color:rgba(255,255,255,.75)">A University of Michigan student organization driving innovation at the intersection of markets, technology, and hardware.</div>
+<a href="mailto:michigan-electronic-trading@umich.edu" style="font-size:14px">michigan-electronic-trading@umich.edu</a>
+</div>
+<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<div class="lbl">Pages</div>
+<a href="/desks">Desks</a><a href="/sponsors">Sponsors</a><a href="/members">Members</a><a href="/join">Join</a>
+</div>
+<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<div class="lbl">Connect</div>
+<a href="#">[LinkedIn]</a><a href="#">[Instagram]</a><a href="mailto:michigan-electronic-trading@umich.edu">Email</a>
+</div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,.25);padding:16px 24px;text-align:center;font-size:12px;color:rgba(255,255,255,.7)">© 2026 Michigan Electronic Trading · [Independent student organization disclaimer]</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2100}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.state = { filter: 'All' }; }
+renderVals() {
+const all = [
+{ stage: 'Execution' }, { stage: 'Research' }, { stage: 'Research' },
+{ stage: 'Execution' }, { stage: 'Research' }, { stage: 'Research' }
+].map((d) => ({ ...d, badge: d.stage === 'Execution' ? '● Execution' : '○ Research' }));
+const f = this.state.filter;
+return {
+stages: [
+{ n: '01', name: 'Proposal', desc: "Members pitch desks at the start of each semester. Each pitch covers the idea, what it takes to build, and who's on the team. The board scores the pitches and approves the desks that launch." },
+{ n: '02', name: 'Research', desc: 'The desk builds its system and tests it with no capital at risk. It moves to execution once it has a working system or a proven edge.' },
+{ n: '03', name: 'Execution', desc: 'The desk trades club capital within set risk limits. If it breaks those limits, it goes back to research.' }
+],
+filters: ['All', 'Research', 'Execution'].map((label) => ({
+label,
+style: label === f ? 'background:#111;color:#fff' : '',
+pick: () => this.setState({ filter: label })
+})),
+shown: f === 'All' ? all : all.filter((d) => d.stage === f)
+};
+}
+}
+</script>
+</body>
+</html>

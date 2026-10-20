@@ -1,0 +1,53 @@
+/* Each tier is a label + logo row; flattened into the section's 32px column gap. */
+.tier {
+  display: contents;
+}
+
+.muted { color: #555; }
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  color: var(--navy);
+  box-sizing: border-box;
+  min-width: 0;
+}
+.logo img {
+  width: 84%;
+  height: 62%;
+  object-fit: contain;
+}
+.large { flex: 1 1 360px; height: 140px; }
+.small { flex: 1 1 200px; height: 96px; }
+
+.why {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.whyCard {
+  flex: 1 1 280px;
+  border: 1.5px solid var(--ink);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.whyTitle {
+  font-size: 20px;
+  font-weight: 600;
+}
+.whyDesc {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+}

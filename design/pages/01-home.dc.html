@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home — design</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#fff;color:#111;font-family:"Red Hat Text",ui-sans-serif,system-ui,sans-serif}
+a{color:#111}a:hover{color:#555}
+.ph{position:relative;border:1.5px solid #111;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:border-box}
+.ph svg{position:absolute;inset:0;width:100%;height:100%}
+.ph span{position:relative;background:#fff;padding:2px 8px;font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.06em;text-align:center}
+.lbl{font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.sec{font-size:20px;letter-spacing:.07em;font-weight:500}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border:1.5px solid #111;text-decoration:none;font-size:14px;font-weight:600;color:#111;background:#fff;box-sizing:border-box;cursor:pointer;font-family:inherit}
+.btn:hover{color:#111;background:#eee}
+.fill{background:#111;color:#fff}
+.fill:hover{background:#333;color:#fff}
+.dark{background:#0B1B33;color:#fff}
+.dark a{color:#fff}.dark a:hover{color:#D9DEE6}
+.dark .btn{border-color:#fff;color:#fff;background:transparent}
+.dark .btn:hover{background:rgba(255,255,255,.12);color:#fff}
+.dark .fill{background:#fff;color:#0B1B33}
+.dark .fill:hover{background:#E6E9EE;color:#0B1B33}
+.dark .ph{border-color:#fff;background:transparent}
+.dark .ph span{background:#0B1B33;color:#fff}
+.dark svg line{stroke:rgba(255,255,255,.35)}
+.dark input::placeholder{color:rgba(255,255,255,.6)}
+.bit{position:absolute;font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-weight:600;line-height:1}
+.tick{position:absolute;font-family:"Red Hat Mono",ui-monospace,Menlo,monospace;font-size:11px;font-weight:700;line-height:1;padding:4px 7px;border:1px solid;border-radius:3px;background:#F4EFE4;white-space:nowrap;letter-spacing:.02em}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.track{display:flex;width:max-content;animation:marquee 30s linear infinite}
+.track.rev{animation-direction:reverse}
+.mq{flex:0 0 200px;height:88px;margin-right:16px;display:flex;align-items:center;justify-content:center;border:1.5px solid #111;background:#fff;box-sizing:border-box}
+.marquee:hover .track{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){.track{animation:none}}
+.pill{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;border:1.5px solid #111;padding:6px 14px}
+.dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px}
+h1,h2,h3,.hf{font-family:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;letter-spacing:-0.01em}
+</style>
+</helmet>
+<div style="min-width:0">
+
+<header class="dark">
+<div style="max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+<a href="/" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;text-decoration:none"><svg viewBox="263 360 1074 880" width="42" height="34" aria-hidden="true" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg><span class="hf" style="font-size:17px;font-weight:600">Michigan Electronic Trading</span></a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:24px;font-size:15px">
+<a href="/desks">Desks</a>
+<a href="/sponsors">Sponsors</a>
+<a href="/members">Members</a>
+<a href="/join" class="btn">Join</a>
+</nav>
+</div>
+</header>
+
+<section class="dark" style="position:relative;height:680px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#1b1e23">
+<img src="../assets/hero-law-quad.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%">
+<div aria-hidden="true" style="position:absolute;inset:0;background:rgba(22,24,29,0.68)"></div>
+<div style="position:relative;padding:40px 48px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;max-width:1160px;margin:0 24px">
+<svg viewBox="263 360 1074 880" width="176" height="144" role="img" aria-label="Logo" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg>
+<h1 style="margin:0;font-size:64px;line-height:1.05;font-weight:700">Michigan Electronic Trading</h1>
+<p style="margin:0;font-size:18px;line-height:1.5;max-width:640px">A University of Michigan student organization driving innovation at the intersection of markets, technology, and hardware.</p>
+</div>
+<a href="#about" aria-label="Scroll to About" style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);width:48px;height:48px;border:1.5px solid #fff;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px">↓</a>
+</section>
+
+<section id="about" style="padding:96px 0;background:#F4EFE4">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">01 — About</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<h2 style="margin:0;font-size:40px;line-height:1.15;text-wrap:balance">A Community of Engineers and <span style="white-space: nowrap">Problem-Solvers<br></span></h2>
+<p style="margin:0;font-size:17px;line-height:1.6">Michigan Electronic Trading (MET) is a team of University of Michigan students who research, build, and run trading strategies across software and hardware. Traders and engineers work side by side with no wall between the two, the same way a real trading firm runs.</p>
+<p style="margin:0;font-size:17px;line-height:1.6">Work happens on desks. Each desk takes one idea from research to live execution. Whether it runs on FPGAs, custom AI models, or alternative data, we build our own solutions to hard market problems.</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 560px;width:560px;max-width:100%;height:440px;position:relative;overflow:hidden">
+<svg viewBox="0 0 560 440" width="560" height="440" style="position:absolute;inset:0;display:block">
+<defs>
+<pattern id="dotgrid" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#0B1B33" opacity="0.10"></circle></pattern>
+</defs>
+<rect width="560" height="440" fill="url(#dotgrid)"></rect>
+<g fill="none" stroke="#0B1B33" stroke-width="1.6" stroke-linejoin="round" opacity="0.8">
+<path d="M172.5 161 H118 V96 H0"></path>
+<path d="M0 220 H146"></path>
+<path d="M172.5 279 H134 V346 H40"></path>
+<path d="M560 108 H444 V161 H406"></path>
+<path d="M387.5 220 H560"></path>
+<path d="M387.5 279 H468 V362 H516"></path>
+<path d="M206 0 V52 H242"></path>
+<path d="M338 440 V394 H388"></path>
+<path d="M118 440 V404 H88"></path>
+<path d="M500 0 V40 H530"></path>
+</g>
+<g fill="#F4EFE4" stroke="#0B1B33" stroke-width="1.6" opacity="0.8">
+<circle cx="40" cy="346" r="4.5"></circle>
+<rect x="516" y="358" width="9" height="9"></rect>
+<circle cx="246" cy="52" r="4.5"></circle>
+<rect x="388" y="389.5" width="9" height="9"></rect>
+<circle cx="84" cy="404" r="4.5"></circle>
+<circle cx="534" cy="40" r="4.5"></circle>
+</g>
+<rect x="146" y="214.5" width="11" height="11" rx="2" fill="#0B1B33"></rect>
+<g stroke="#C08F12" stroke-width="1.4" stroke-linecap="round"><path d="M162 212 L166 207"></path><path d="M163 220 H169"></path><path d="M162 228 L166 233"></path></g>
+<rect x="395" y="155.5" width="11" height="11" rx="2" fill="#0B1B33"></rect>
+<g stroke="#C08F12" stroke-width="1.4" stroke-linecap="round"><path d="M391 153 L388 148"></path><path d="M390.5 161 H392.5"></path><path d="M391 169 L388 174"></path></g>
+<g fill="#C08F12">
+<polygon points="426,215 434,220 426,225"></polygon>
+<polygon points="466,215 474,220 466,225"></polygon>
+<polygon points="506,215 514,220 506,225"></polygon>
+<polygon points="74,91 66,96 74,101"></polygon>
+<polygon points="34,91 26,96 34,101"></polygon>
+<polygon points="129,308 139,308 134,316"></polygon>
+<polygon points="463,316 473,316 468,324"></polygon>
+<polygon points="201,22 211,22 206,30"></polygon>
+</g>
+<g transform="translate(280 220) scale(0.2) translate(-800 -800)">
+<path fill="#0B1B33" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path>
+<path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path>
+</g>
+</svg>
+<div style="position:absolute;inset:0;pointer-events:none">
+<sc-for list="{{bits}}" as="b" hint-placeholder-count="30">
+<span class="bit" style="{{b.gstyle}}">{{b.ch}}</span>
+<span class="bit" style="{{b.style}}">{{b.ch}}</span>
+</sc-for>
+<sc-for list="{{arrows}}" as="a" hint-placeholder-count="12">
+<span class="bit" style="{{a.style}}">{{a.ch}}</span>
+</sc-for>
+<sc-for list="{{tickers}}" as="t" hint-placeholder-count="7">
+<span class="tick" style="{{t.gstyle}}">{{t.label}}</span>
+<span class="tick" style="{{t.style}}">{{t.label}}</span>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="padding:96px 0;border-top:1.5px solid #111;background:#FAF8F3">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">02 — Desks</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:48px">
+<h2 style="margin:0;flex:1 1 320px;font-size:36px;line-height:1.15">How Desks Work</h2>
+<p style="margin:0;flex:1 1 420px;font-size:17px;line-height:1.6">A desk is a small team of traders and engineers working on one strategy or system. Members pitch new desks at the start of each semester.</p>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+<sc-for list="{{stages}}" as="s" hint-placeholder-count="3">
+<li style="flex:1 1 260px;border:1.5px solid #111;padding:28px;display:flex;flex-direction:column;gap:10px">
+<span class="lbl">{{s.n}} →</span>
+<span class="hf" style="font-size:20px;font-weight:600">{{s.name}}</span>
+<span style="font-size:15px;line-height:1.5;color:#444">{{s.desc}}</span>
+</li>
+</sc-for>
+</ol>
+<a href="/desks" class="btn fill" style="align-self:flex-start">[See our desks →]</a>
+</div>
+</section>
+
+<section style="padding:96px 0;border-top:1.5px solid #111;background:#ECEBE7">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:32px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">03 — Sponsors</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+</div>
+<div class="marquee" style="overflow:hidden;margin-top:32px;border-top:1.5px solid #111;border-bottom:1.5px solid #111;padding:20px 0" aria-label="Sponsor logos, auto-scrolling">
+<div class="track" style="animation-duration:30s">
+<div class="mq"><img src="../assets/placeholder-logos/vantrel.svg" alt="Vantrel Capital" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/orrin-hale.svg" alt="Orrin &amp; Hale" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/pinewire.svg" alt="Pinewire Trading" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/lumabit.svg" alt="Lumabit" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/arclane.svg" alt="Arclane Markets" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq"><img src="../assets/placeholder-logos/tessaline.svg" alt="Tessaline Systems" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/vantrel.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/orrin-hale.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/pinewire.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/lumabit.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/arclane.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+<div class="mq" aria-hidden="true"><img src="../assets/placeholder-logos/tessaline.svg" alt="" style="width:80%;height:60%;object-fit:contain"></div>
+</div>
+</div>
+<div style="max-width:1200px;margin:32px auto 0;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center">
+<span class="lbl" style="color:#555">[Auto-scrolls left · pauses on hover]</span>
+<a href="/sponsors" class="btn">[Become a sponsor]</a>
+</div>
+</section>
+
+<section id="join" style="padding:96px 0;border-top:1.5px solid #111;background:#F4EFE4">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;align-items:center;gap:16px"><span class="lbl sec">04 — Join</span><div style="flex:1;height:1.5px;background:#111"></div></div>
+<div style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
+<div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:20px">
+<div class="lbl pill"><span class="dot" style="background:#8A8A8A"></span>Applications closed</div>
+<h2 style="margin:0;font-size:36px;line-height:1.15">Applications Are Closed</h2>
+<p style="margin:0;font-size:17px;line-height:1.6">Leave your info and we'll email you when Winter 2027 applications open.</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+<a href="#" target="_blank" rel="noopener" class="btn fill">Get Notified</a>
+<a href="/join" style="font-size:15px;font-weight:600">How recruiting works →</a>
+</div>
+</div>
+<div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:12px">
+<span class="lbl" style="color:#555">Winter 2027 recruiting</span>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:12px">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+<li style="flex:1 1 90px;min-width:0;border:1.5px solid #111;padding:18px;display:flex;flex-direction:column;gap:8px">
+<span class="lbl">{{s.n}}</span>
+<span style="font-weight:600">{{s.name}}</span>
+<span class="lbl" style="color:#555">TBA</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="dark">
+<div style="max-width:1200px;margin:0 auto;padding:48px 24px;display:flex;flex-wrap:wrap;gap:48px">
+<div style="flex:1 1 240px;display:flex;flex-direction:column;gap:12px">
+<svg viewBox="263 360 1074 880" width="68" height="56" role="img" aria-label="Logo" style="display:block"><path fill="#fff" fill-rule="evenodd" d="M360 360H527V1240H360Z M423 423V1177H464V423Z M1073 360H1240V1240H1073Z M1136 423V1177H1177V423Z M605 360H995L800 1135Z M686 423L800 876L914 423Z M578 465L774 1240H578Z M641 975V1177H692Z M1022 465L826 1240H1022Z M959 975L908 1177H959Z"></path><path fill="#D9A21B" d="M263 475H360V538H263Z M263 768H360V831H263Z M263 1062H360V1125H263Z M1240 475H1337V538H1240Z M1240 768H1337V831H1240Z M1240 1062H1337V1125H1240Z"></path></svg>
+<div class="hf" style="font-size:18px;font-weight:600">Michigan Electronic Trading</div>
+<div style="font-size:14px;color:rgba(255,255,255,.75)">A University of Michigan student organization driving innovation at the intersection of markets, technology, and hardware.</div>
+<a href="mailto:michigan-electronic-trading@umich.edu" style="font-size:14px">michigan-electronic-trading@umich.edu</a>
+</div>
+<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<div class="lbl">Pages</div>
+<a href="/desks">Desks</a><a href="/sponsors">Sponsors</a><a href="/members">Members</a><a href="/join">Join</a>
+</div>
+<div style="flex:0 0 160px;display:flex;flex-direction:column;gap:10px;font-size:14px">
+<div class="lbl">Connect</div>
+<a href="#">[LinkedIn]</a><a href="#">[Instagram]</a><a href="mailto:michigan-electronic-trading@umich.edu">Email</a>
+</div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,.25);padding:16px 24px;text-align:center;font-size:12px;color:rgba(255,255,255,.7)">© 2026 Michigan Electronic Trading · [Independent student organization disclaimer]</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":3500}}'>
+class Component extends DCLogic {
+renderVals() {
+const rnd = (a) => { const x = Math.sin(a * 91.17 + 7.3) * 43758.5453; return x - Math.floor(x); };
+const inLogo = (x, y) => x > 150 && x < 410 && y > 132 && y < 308;
+const navy = '#0B1B33', up = '#B8860B';
+const bits = [];
+for (let gy = 0; gy < 6; gy++) {
+for (let gx = 0; gx < 8; gx++) {
+const id = gy * 8 + gx;
+const x = 10 + gx * 68 + rnd(id) * 40;
+const y = 10 + gy * 70 + rnd(id + 50) * 34;
+if (inLogo(x + 6, y + 8) || rnd(id + 99) < 0.3) continue;
+const o = 0.16 + rnd(id + 3) * 0.28;
+const s = 11 + Math.round(rnd(id + 5) * 6);
+const col = rnd(id + 7) < 0.15 ? up : navy;
+const ch = rnd(id + 13) < 0.5 ? '1' : '0';
+bits.push({
+ch,
+style: 'left:' + x.toFixed(0) + 'px;top:' + y.toFixed(0) + 'px;font-size:' + s + 'px;opacity:' + o.toFixed(2) + ';color:' + col,
+gstyle: 'left:' + x.toFixed(0) + 'px;top:' + (y + s * 0.6).toFixed(0) + 'px;font-size:' + s + 'px;opacity:' + (rnd(id + 11) < 0.4 ? (o * 0.25).toFixed(2) : '0') + ';color:' + col
+});
+}
+}
+const baseT = [
+[22, 22, 'ES 5,812.25 ▲', true], [262, 16, 'NQ ▼ 0.42%', false], [14, 122, 'ZN 110’16 ▼', false],
+[422, 238, 'AAPL 228.10 ▲', true], [198, 324, 'CL 71.84 ▲', true], [430, 396, 'BTC ▼ 1.2%', false], [236, 404, 'SPY ▲ 0.8%', true]
+];
+const tickers = baseT.map(([x, y, label, isUp]) => ({
+label,
+style: 'left:' + x + 'px;top:' + y + 'px;opacity:0.62;color:' + (isUp ? up : navy),
+gstyle: 'left:' + x + 'px;top:' + (y + 9) + 'px;opacity:0.14;color:' + (isUp ? up : navy)
+}));
+const glyphs = ['▲', '▼', '↗', '↘', '→'];
+const arrows = [];
+for (let k = 0; k < 20; k++) {
+const x = 30 + (k % 5) * 108 + rnd(k + 1000) * 50;
+const y = 40 + Math.floor(k / 5) * 100 + rnd(k + 1100) * 50;
+if (inLogo(x + 6, y + 8) || rnd(k + 1200) < 0.35) continue;
+const g = glyphs[Math.floor(rnd(k + 1300) * glyphs.length)];
+const isUp = g === '▲' || g === '↗';
+arrows.push({ ch: g, style: 'left:' + x.toFixed(0) + 'px;top:' + y.toFixed(0) + 'px;font-size:' + (12 + Math.round(rnd(k + 1400) * 6)) + 'px;opacity:0.35;color:' + (isUp ? up : navy) });
+}
+return {
+bits, tickers, arrows,
+stages: [
+{ n: '01', name: 'Proposal', desc: 'A member pitches an idea and the students and expertise needed to build it. The board reviews each pitch and approves the desks that launch.' },
+{ n: '02', name: 'Research', desc: 'The desk builds and tests its strategy without capital on the line. It moves forward once it has a working system or a proven edge.' },
+{ n: '03', name: 'Execution', desc: 'The desk trades real capital within set risk limits. If it breaks those limits, it goes back to research.' }
+],
+steps: [{ n: '01', name: 'Winterfest' }, { n: '02', name: 'Mass Meeting' }, { n: '03', name: 'Application' }, { n: '04', name: 'Interviews' }]
+};
+}
+}
+</script>
+</body>
+</html>

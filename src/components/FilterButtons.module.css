@@ -1,0 +1,11 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.active,
+.active:hover {
+  background: var(--ink);
+  color: #fff;
+}

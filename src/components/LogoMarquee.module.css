@@ -1,0 +1,48 @@
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee {
+  overflow: hidden;
+  margin-top: 32px;
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  padding: 20px 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.rev { animation-direction: reverse; }
+.marquee:hover .track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; }
+}
+
+.mq {
+  flex: 0 0 200px;
+  height: 88px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.img {
+  width: 80%;
+  height: 60%;
+  object-fit: contain;
+}

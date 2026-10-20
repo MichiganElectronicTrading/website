@@ -1,0 +1,39 @@
+import type { Metadata } from "next";
+import { Red_Hat_Display, Red_Hat_Mono, Red_Hat_Text } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { site } from "@/data/site";
+import "./globals.css";
+
+const display = Red_Hat_Display({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-red-hat-display",
+});
+const text = Red_Hat_Text({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-red-hat-text",
+});
+const mono = Red_Hat_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-red-hat-mono",
+});
+
+export const metadata: Metadata = {
+  title: { default: site.name, template: `%s · ${site.name}` },
+  description: site.tagline,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${display.variable} ${text.variable} ${mono.variable}`}>
+      <body>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}

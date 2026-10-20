@@ -1,0 +1,31 @@
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.home,
+.desks {
+  border: 1.5px solid var(--ink);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.home { flex: 1 1 260px; }
+.desks { flex: 1 1 240px; }
+
+.name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #444;
+}

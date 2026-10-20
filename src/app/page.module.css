@@ -1,0 +1,121 @@
+.hero {
+  position: relative;
+  height: 680px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1b1e23;
+}
+.heroImg {
+  object-fit: cover;
+  object-position: 50% 62%;
+}
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 24, 29, 0.68);
+}
+.heroInner {
+  position: relative;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  max-width: 1160px;
+  margin: 0 24px;
+}
+.heroInner h1 {
+  margin: 0;
+  font-size: 64px;
+  line-height: 1.05;
+  font-weight: 700;
+}
+.heroInner p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 640px;
+}
+.scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.aboutRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: center;
+}
+.aboutCopy {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.aboutCopy h2 {
+  margin: 0;
+  font-size: 40px;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.aboutCopy p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.nowrap { white-space: nowrap; }
+
+.desksIntro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+.desksIntro h2 {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: 36px;
+  line-height: 1.15;
+}
+.desksIntro p {
+  margin: 0;
+  flex: 1 1 420px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.start { align-self: flex-start; }
+
+.sponsorsHead {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.sponsorsFoot {
+  max-width: 1200px;
+  margin: 32px auto 0;
+  padding: 0 24px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
