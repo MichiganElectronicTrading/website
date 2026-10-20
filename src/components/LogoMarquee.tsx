@@ -16,7 +16,7 @@ const MIN_TILES = 8;
 type Props = {
   rows: Row[];
   label: string;
-  /** Size each tile to its logo so the logo fills it edge to edge. */
+  /** Logos are drawn to the tile's shape, so show them edge to edge. */
   fill?: boolean;
 };
 
