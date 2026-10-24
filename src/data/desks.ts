@@ -25,7 +25,7 @@ export const stages: Stage[] = [
     summary:
       "A member pitches an idea and the students and expertise needed to build it. The board reviews each pitch and approves the desks that launch.",
     description:
-      "Members pitch desks at the start of each semester. Each pitch covers the idea, what it takes to build, and who's on the team. The board scores the pitches and approves the desks that launch.",
+      "Members pitch desks at the start of each semester. Each pitch covers the idea, what it takes to build, and who's on the team.",
   },
   {
     n: "02",
@@ -39,9 +39,9 @@ export const stages: Stage[] = [
     n: "03",
     name: "Execution",
     summary:
-      "The desk trades real capital within set risk limits. If it breaks those limits, it goes back to research.",
+      "The desk trades real capital within set risk limits. It monitors its risk in real time and scales back as it nears those limits.",
     description:
-      "The desk trades club capital within set risk limits. If it breaks those limits, it goes back to research.",
+      "The desk trades club capital within set risk limits. It monitors its risk in real time and scales back as it nears those limits.",
   },
 ];
 
