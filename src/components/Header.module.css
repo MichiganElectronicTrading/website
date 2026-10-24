@@ -1,3 +1,10 @@
+/* Stays pinned to the top of the screen while the page scrolls. */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
 .inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -30,7 +37,11 @@
   font-size: 15px;
 }
 
-.current {
+/* Only the current page's link is underlined. */
+.nav a {
+  text-decoration: none;
+}
+.nav .current {
   font-weight: 700;
   text-decoration: underline;
 }

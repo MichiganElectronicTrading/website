@@ -17,7 +17,7 @@ export default function Header() {
   const onJoin = pathname === "/join";
 
   return (
-    <header className="dark">
+    <header className={`dark ${styles.bar}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand}>
           <MetMark width={42} height={34} />
