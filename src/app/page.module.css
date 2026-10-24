@@ -61,19 +61,29 @@
   font-size: 18px;
 }
 
-/* Intro: background, then logo, then title, subtitle and arrow. Opacity only. */
+/* Intro: background, then logo dropping in, then title and subtitle rising in with the arrow. */
 @keyframes heroFade {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+@keyframes heroDrop {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
 }
 .heroBg {
   animation: heroFade 0.9s ease-out 0s both;
 }
 .heroInner > :first-child {
-  animation: heroFade 0.7s ease-out 0.7s both;
+  animation: heroDrop 0.7s ease-out 0.7s both;
 }
 .heroInner h1,
-.heroInner p,
+.heroInner p {
+  animation: heroRise 0.7s ease-out 1.3s both;
+}
 .scroll {
   animation: heroFade 0.7s ease-out 1.3s both;
 }
