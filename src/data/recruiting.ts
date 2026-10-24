@@ -23,7 +23,7 @@ export const recruiting = {
     { name: "Winterfest", date: "[DATE]", description: "Find us at our table to meet members and ask questions." },
     { name: "Mass Meeting", date: "[DATE]", description: "Hear how MET works, what desks are building, and how to apply." },
     { name: "Application", date: "[DATE]", due: true, description: "A short written application. Pick a track and tell us what you've built." },
-    { name: "Interviews", date: "[DATE]", description: "Behavioral and technical rounds. Final rounds include a live trading game." },
+    { name: "Interviews", date: "[DATE]", description: "A mix of behavioral and technical rounds." },
   ] as RecruitingStep[],
 };
 
