@@ -6,12 +6,13 @@ import Placeholder from "@/components/Placeholder";
 import MemberGrid from "@/components/MemberGrid";
 import LogoMarquee from "@/components/LogoMarquee";
 import { board, deskHeads } from "@/data/members";
-import { placements } from "@/data/placements";
+import { placements, showPlacements } from "@/data/placements";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Members" };
 
-const label = numberSections(["The Board", "Desk Heads", "All members", placements.length > 0 && "Member Placements"]);
+const hasPlacements = showPlacements && placements.length > 0;
+const label = numberSections(["The Board", "Desk Heads", "All members", hasPlacements && "Member Placements"]);
 
 export default function MembersPage() {
   return (
@@ -80,7 +81,7 @@ export default function MembersPage() {
         <MemberGrid />
       </Section>
 
-      {placements.length > 0 && (
+      {hasPlacements && (
         <Section bg="cream" pad={72} rule bare>
           <div className={styles.placementsHead}>
             <SectionLabel>{label["Member Placements"]}</SectionLabel>
