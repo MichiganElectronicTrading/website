@@ -12,7 +12,7 @@ type Props = {
 /** Navy band at the top of inner pages. */
 export default function PageHeader({ title, text, before, after }: Props) {
   return (
-    <section className={`dark ${styles.band}`}>
+    <section className={`dark ${styles.band}`} data-reveal-root="">
       <div className={styles.inner}>
         {before}
         <h1>{title}</h1>

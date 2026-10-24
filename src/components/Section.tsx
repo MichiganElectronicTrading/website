@@ -19,7 +19,7 @@ export default function Section({ bg, pad, rule, gap = 32, id, bare, children }:
     .filter(Boolean)
     .join(" ");
   return (
-    <section id={id} className={cls}>
+    <section id={id} className={cls} data-reveal-root="">
       {bare ? children : <div className={`${styles.container} ${gap === 40 ? styles.gap40 : styles.gap32}`}>{children}</div>}
     </section>
   );
@@ -28,9 +28,12 @@ export default function Section({ bg, pad, rule, gap = 32, id, bare, children }:
 /** "01 — About" label followed by a rule that fills the row. */
 export function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className={styles.label}>
-      <span className={`lbl ${styles.sec}`}>{children}</span>
-      <div className={styles.line} />
+    <div className={styles.label} data-reveal-label="">
+      <span className={`lbl ${styles.sec}`} data-reveal-text="">
+        <span data-reveal-real="">{children}</span>
+        <span aria-hidden="true" data-reveal-scramble="" />
+      </span>
+      <div className={styles.line} data-reveal-line="" />
     </div>
   );
 }

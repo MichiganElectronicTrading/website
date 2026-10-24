@@ -30,7 +30,11 @@ export default function LogoMarquee({ rows, label, fill }: Props) {
   if (visible.length === 0) return null;
 
   return (
-    <div className={`${styles.marquee} ${visible.length > 1 ? styles.stack : ""}`} aria-label={label}>
+    <div
+      className={`${styles.marquee} ${visible.length > 1 ? styles.stack : ""}`}
+      aria-label={label}
+      data-reveal="unit"
+    >
       {visible.map((row, i) => (
         <div
           key={i}

@@ -86,3 +86,54 @@ h1, h2, h3, .hf {
   letter-spacing: 0.06em;
   text-align: center;
 }
+
+/*
+ * Scroll reveal (see src/components/Reveal.tsx, where the timings live).
+ * Nothing here hides content unless that script, or its inline boot script, is running.
+ */
+html.reveal-pending [data-reveal-root] > * { opacity: 0; }
+
+[data-reveal-anim="fade"][data-reveal-state="pending"],
+[data-reveal-anim="item"][data-reveal-state="pending"] {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance, 12px));
+}
+[data-reveal-anim="fade"][data-reveal-state="in"],
+[data-reveal-anim="item"][data-reveal-state="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--reveal-fade, 450ms) ease-out var(--reveal-delay, 0ms),
+    transform var(--reveal-fade, 450ms) ease-out var(--reveal-delay, 0ms);
+}
+
+/* Section labels: real text stays in the page for screen readers; the scramble draws on top. */
+[data-reveal-text] { position: relative; }
+[data-reveal-scramble] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: pre;
+  pointer-events: none;
+}
+[data-reveal-anim="label"][data-reveal-state="pending"] [data-reveal-real],
+[data-reveal-anim="label"][data-reveal-state="in"] [data-reveal-real] { opacity: 0; }
+[data-reveal-anim="label"] [data-reveal-line] { transform-origin: left center; }
+[data-reveal-anim="label"][data-reveal-state="pending"] [data-reveal-line] { transform: scaleX(0); }
+[data-reveal-anim="label"][data-reveal-state="in"] [data-reveal-line],
+[data-reveal-anim="label"][data-reveal-state="done"] [data-reveal-line] {
+  transform: scaleX(1);
+  transition: transform var(--reveal-line, 500ms) ease-out var(--reveal-line-delay, 350ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-pending [data-reveal-root] > *,
+  [data-reveal-state],
+  [data-reveal-state] [data-reveal-real],
+  [data-reveal-state] [data-reveal-line] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  [data-reveal-scramble] { display: none; }
+}

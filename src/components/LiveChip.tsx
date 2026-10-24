@@ -105,7 +105,7 @@ export default function LiveChip() {
   }, []);
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} data-reveal="off">
       <div ref={stageRef} className={styles.stage}>
         <canvas ref={canvasRef} aria-hidden="true" className={styles.canvas} />
       </div>

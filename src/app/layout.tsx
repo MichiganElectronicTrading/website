@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Red_Hat_Display, Red_Hat_Mono, Red_Hat_Text } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Reveal, { revealBootScript } from "@/components/Reveal";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -28,11 +29,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${text.variable} ${mono.variable}`}>
+    // The boot script adds a class to <html> before React hydrates.
+    <html lang="en" className={`${display.variable} ${text.variable} ${mono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: revealBootScript }} />
+      </head>
       <body>
         <Header />
         <main>{children}</main>
         <Footer />
+        <Reveal />
       </body>
     </html>
   );
