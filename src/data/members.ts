@@ -36,7 +36,7 @@ export const board: BoardMember[] = [
     name: "Colter Gladish",
     role: "Director of Technology",
     title: "Founding Partner",
-    education: "Financial Math + CS · 2029",
+    education: "Financial Math and CS · 2029",
     photo: "/headshot-colter-gladish.jpg",
     linkedin: { href: "https://www.linkedin.com/in/coltergladish/", label: "LinkedIn →" },
   },
