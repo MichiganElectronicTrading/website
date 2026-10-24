@@ -63,10 +63,8 @@
 .faq {
   display: flex;
   flex-direction: column;
-  border-top: 1.5px solid var(--ink);
 }
 .item {
-  border-bottom: 1.5px solid var(--ink);
   padding: 12px 0;
 }
 .item p {
