@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Section, { SectionLabel } from "./Section";
-import StatusPill from "./StatusPill";
 import { recruiting } from "@/data/recruiting";
 import styles from "./HomeJoin.module.css";
 
@@ -13,7 +12,6 @@ export default function HomeJoin({ label }: { label: string }) {
       <SectionLabel>{label}</SectionLabel>
       <div className={styles.row}>
         <div className={styles.copy}>
-          <StatusPill open={open} tone="light" />
           {open ? (
             <>
               <h2>Applications Are Open</h2>
@@ -36,38 +34,6 @@ export default function HomeJoin({ label }: { label: string }) {
               How recruiting works →
             </Link>
           </div>
-        </div>
-        <div className={styles.timeline}>
-          <span className={`lbl ${styles.muted}`}>{recruiting.term} recruiting</span>
-          <ol className={styles.steps}>
-            {recruiting.steps.map((step, i) => {
-              const n = String(i + 1).padStart(2, "0");
-              if (!open) {
-                return (
-                  <li key={step.name} className={styles.step}>
-                    <span className="lbl">{n}</span>
-                    <span className={styles.stepName}>{step.name}</span>
-                    <span className={`lbl ${styles.muted}`}>TBA</span>
-                  </li>
-                );
-              }
-              const now = i === recruiting.currentStep;
-              const past = i < recruiting.currentStep;
-              return (
-                <li
-                  key={step.name}
-                  className={`${styles.step} ${now ? styles.now : past ? styles.past : ""}`}
-                  aria-current={now ? "step" : undefined}
-                >
-                  <span className={`lbl ${now ? styles.nowN : ""}`}>{now ? `${n} · Now` : n}</span>
-                  <span className={styles.stepName}>{step.name}</span>
-                  <span className={`lbl ${now ? styles.nowDate : styles.muted}`}>
-                    {step.due ? `Due ${step.date}` : step.date}
-                  </span>
-                </li>
-              );
-            })}
-          </ol>
         </div>
       </div>
     </Section>
