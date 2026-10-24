@@ -23,6 +23,7 @@ const mono = Red_Hat_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://michiganelectronictrading.com"),
   title: { default: site.name, template: `%s · ${site.name}` },
   description: site.tagline,
 };
