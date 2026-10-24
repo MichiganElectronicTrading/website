@@ -31,7 +31,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // The boot script adds a class to <html> before React hydrates.
-    <html lang="en" className={`${display.variable} ${text.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${display.variable} ${text.variable} ${mono.variable}`}
+      // Lets Next.js turn smooth scrolling off during page changes.
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: revealBootScript }} />
       </head>
