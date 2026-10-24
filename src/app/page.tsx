@@ -64,7 +64,7 @@ export default function Home() {
         </div>
         <StageCards variant="home" />
         <Link href="/desks" className={`btn fill ${styles.start}`}>
-          [See our desks →]
+          See our desks
         </Link>
       </Section>
 
