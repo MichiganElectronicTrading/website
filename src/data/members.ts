@@ -27,16 +27,17 @@ export const board: BoardMember[] = [
     name: "Mihir Epel",
     role: "Director of Engineering",
     title: "Founding Partner",
-    education: "B.S.E. Computer Engineering · 2029",
+    education: "B.S.E. Computer Engineering · 2028",
     photo: "/headshot-mihir-epel.jpg",
     linkedin: { href: "https://www.linkedin.com/in/mihirepel/", label: "LinkedIn →" },
   },
   {
-    name: "[Name]",
+    name: "Colter Gladish",
     role: "Director of Technology",
     title: "Founding Partner",
-    education: "[Year · major]",
-    linkedin: { href: "#", label: "[LinkedIn →]" },
+    education: "Financial Math + CS",
+    photo: "/headshot-colter-gladish.jpg",
+    linkedin: { href: "https://www.linkedin.com/in/coltergladish/", label: "LinkedIn →" },
   },
 ];
 
@@ -45,13 +46,13 @@ export const deskHeads: DeskHead[] = Array.from({ length: 4 }, () => ({
   desk: "[Desk name]",
 }));
 
-const tracks: Track[] = [
-  "Trading", "Engineering", "Trading", "Engineering", "Engineering", "Trading",
+/** Tracks for the remaining placeholder tiles. */
+const placeholderTracks: Track[] = [
+  "Trading", "Trading", "Engineering", "Engineering", "Trading",
   "Trading", "Engineering", "Trading", "Engineering", "Trading", "Engineering",
 ];
 
-export const members: Member[] = tracks.map((track) => ({
-  name: "[Name]",
-  track,
-  desk: "[Desk name]",
-}));
+export const members: Member[] = [
+  { name: "Avi Goldschmidt", track: "Engineering", desk: "[Desk name]", photo: "/headshot-avi-goldschmidt.jpg" },
+  ...placeholderTracks.map((track) => ({ name: "[Name]", track, desk: "[Desk name]" })),
+];
