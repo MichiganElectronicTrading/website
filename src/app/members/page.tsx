@@ -12,7 +12,7 @@ import styles from "./page.module.css";
 export const metadata: Metadata = { title: "Members" };
 
 const hasPlacements = showPlacements && placements.length > 0;
-const label = numberSections(["The Board", "Desk Heads", "All members", hasPlacements && "Member Placements"]);
+const label = numberSections(["The Board", "Desk Heads", "General members", hasPlacements && "Member Placements"]);
 
 export default function MembersPage() {
   return (
@@ -87,7 +87,7 @@ export default function MembersPage() {
       </Section>
 
       <Section bg="grey" pad={72} rule>
-        <SectionLabel>{label["All members"]}</SectionLabel>
+        <SectionLabel>{label["General members"]}</SectionLabel>
         <MemberGrid />
       </Section>
 
