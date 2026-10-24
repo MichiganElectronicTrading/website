@@ -1,11 +1,11 @@
+/* Fixed columns, so a short last row keeps normal card widths and sits at the left. */
 .grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 24px;
 }
 
 .card {
-  flex: 1 1 320px;
   min-width: 0;
   border: 1.5px solid var(--ink);
   display: flex;
