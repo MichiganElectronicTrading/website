@@ -18,8 +18,10 @@ export default function Home() {
   return (
     <>
       <section className={`dark ${styles.hero}`}>
-        <Image src={hero} alt="" aria-hidden priority placeholder="empty" fill sizes="100vw" className={styles.heroImg} />
-        <div aria-hidden="true" className={styles.heroShade} />
+        <div aria-hidden="true" className={styles.heroBg}>
+          <Image src={hero} alt="" priority placeholder="empty" fill sizes="100vw" className={styles.heroImg} />
+          <div className={styles.heroShade} />
+        </div>
         <div className={styles.heroInner}>
           <MetMark width={176} height={144} label="Logo" />
           <h1>{site.name}</h1>

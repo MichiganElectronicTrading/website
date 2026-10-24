@@ -5,7 +5,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #1b1e23;
+  background: #0b1b33;
+}
+/* Photo and its overlay, faded in together. */
+.heroBg {
+  position: absolute;
+  inset: 0;
 }
 .heroImg {
   object-fit: cover;
@@ -54,6 +59,32 @@
   justify-content: center;
   text-decoration: none;
   font-size: 18px;
+}
+
+/* Intro: background, then logo, then title, subtitle and arrow. Opacity only. */
+@keyframes heroFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.heroBg {
+  animation: heroFade 0.9s ease-out 0s both;
+}
+.heroInner > :first-child {
+  animation: heroFade 0.7s ease-out 0.7s both;
+}
+.heroInner h1,
+.heroInner p,
+.scroll {
+  animation: heroFade 0.7s ease-out 1.3s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroBg,
+  .heroInner > :first-child,
+  .heroInner h1,
+  .heroInner p,
+  .scroll {
+    animation: none;
+  }
 }
 
 .aboutRow {
