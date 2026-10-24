@@ -2,14 +2,21 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 0;
-  border: 1.5px solid var(--ink);
+  /* Room for the tiles' outer lines. */
+  padding: 0.75px;
 }
+/* A filter with no matches shows nothing instead of an empty bordered box. */
+.grid:empty { display: none; }
 
 .card {
   position: relative;
   aspect-ratio: 3 / 4;
   background: #c9c8c3;
   overflow: hidden;
+  /* Each tile draws its own line, centred on its edge, so neighbours share one
+     1.5px line and the border wraps only the tiles that exist. */
+  outline: 1.5px solid var(--ink);
+  outline-offset: -0.75px;
 }
 
 .photo { object-fit: cover; }
