@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MetMark from "./MetMark";
+import EmailLink from "./EmailLink";
 import { site } from "@/data/site";
 import styles from "./Footer.module.css";
 
@@ -11,9 +12,7 @@ export default function Footer() {
           <MetMark width={68} height={56} label="Logo" />
           <div className={`hf ${styles.name}`}>{site.name}</div>
           <div className={styles.tagline}>{site.tagline}</div>
-          <a href={`mailto:${site.email}`} className={styles.small}>
-            {site.email}
-          </a>
+          <EmailLink variant="address" className={styles.small} />
         </div>
         <div className={styles.col}>
           <div className="lbl">Pages</div>
@@ -27,11 +26,11 @@ export default function Footer() {
           <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
           <a href={site.instagram} target="_blank" rel="noopener">Instagram</a>
           <a href={site.github} target="_blank" rel="noopener">GitHub</a>
-          <a href={`mailto:${site.email}`}>Email</a>
+          <EmailLink variant="mail">Email</EmailLink>
         </div>
       </div>
       <div className={styles.legal}>
-        © 2026 {site.name} · [Independent student organization disclaimer]
+        © 2026 {site.name}
       </div>
     </footer>
   );

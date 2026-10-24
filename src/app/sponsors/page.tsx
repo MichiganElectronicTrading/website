@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import Section, { CtaRow, SectionLabel, numberSections } from "@/components/Section";
 import { sponsorTiers, whyPartner } from "@/data/sponsors";
-import { site } from "@/data/site";
+import EmailLink from "@/components/EmailLink";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Sponsors" };
@@ -52,9 +52,9 @@ export default function SponsorsPage() {
 
       <Section id="contact" bg="grey" pad={72} rule bare>
         <CtaRow title="Partner With Us" text="Email the board to start a conversation.">
-          <a href={`mailto:${site.email}`} className="btn fill">
+          <EmailLink variant="mail" className="btn fill">
             Email the Board
-          </a>
+          </EmailLink>
         </CtaRow>
       </Section>
     </>

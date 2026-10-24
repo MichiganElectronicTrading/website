@@ -1,0 +1,53 @@
+.address {
+  display: inline-grid;
+  justify-items: start;
+  justify-self: start;
+  align-self: flex-start;
+}
+.address > span {
+  grid-area: 1 / 1;
+}
+.hidden {
+  visibility: hidden;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 100;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease-out, visibility 0s linear 200ms;
+}
+.toastShown {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms ease-out, visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .toastShown {
+    transition: none;
+  }
+}

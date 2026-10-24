@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import Section, { CtaRow, SectionLabel, numberSections } from "@/components/Section";
 import StatusPill from "@/components/StatusPill";
 import { faq, recruiting, tracks } from "@/data/recruiting";
-import { site } from "@/data/site";
+import EmailLink from "@/components/EmailLink";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Join" };
@@ -83,9 +83,9 @@ export default function JoinPage() {
 
       <Section bg="cream" pad={72} rule bare>
         <CtaRow title="Still Have Questions?" text="Email the board and we'll get back to you.">
-          <a href={`mailto:${site.email}`} className="btn fill">
+          <EmailLink variant="mail" className="btn fill">
             Email the Board
-          </a>
+          </EmailLink>
         </CtaRow>
       </Section>
     </>
