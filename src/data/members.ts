@@ -24,11 +24,12 @@ export const board: BoardMember[] = [
     linkedin: { href: "https://www.linkedin.com/in/-davidjamessmith", label: "LinkedIn →" },
   },
   {
-    name: "[Name]",
+    name: "Mihir Epel",
     role: "Director of Engineering",
     title: "Founding Partner",
-    education: "[Year · major]",
-    linkedin: { href: "#", label: "[LinkedIn →]" },
+    education: "B.S.E. Computer Engineering · 2029",
+    photo: "/headshot-mihir-epel.jpg",
+    linkedin: { href: "https://www.linkedin.com/in/mihirepel/", label: "LinkedIn →" },
   },
   {
     name: "[Name]",
