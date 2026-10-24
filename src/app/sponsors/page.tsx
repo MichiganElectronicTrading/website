@@ -10,6 +10,8 @@ export const metadata: Metadata = { title: "Sponsors" };
 export default function SponsorsPage() {
   const hasSponsors = sponsorTiers.length > 0;
   const label = numberSections([hasSponsors && "Our sponsors", "Why partner"]);
+  // Section colours follow the visible order: cream, then off-white, then grey.
+  const [whyBg, contactBg] = hasSponsors ? (["offWhite", "grey"] as const) : (["cream", "offWhite"] as const);
 
   return (
     <>
@@ -37,7 +39,7 @@ export default function SponsorsPage() {
         </Section>
       )}
 
-      <Section bg="offWhite" pad={72} rule={hasSponsors}>
+      <Section bg={whyBg} pad={72} rule={hasSponsors}>
         <SectionLabel>{label["Why partner"]}</SectionLabel>
         <div className={styles.why}>
           {whyPartner.map((w) => (
@@ -50,7 +52,7 @@ export default function SponsorsPage() {
         </div>
       </Section>
 
-      <Section id="contact" bg="grey" pad={72} rule bare>
+      <Section id="contact" bg={contactBg} pad={72} rule bare>
         <CtaRow title="Partner With Us" text="Email the board to start a conversation.">
           <EmailLink variant="mail" className="btn fill">
             Email the Board
