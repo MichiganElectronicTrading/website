@@ -18,7 +18,17 @@ export default function MemberGrid() {
       <div className={styles.grid}>
         {shown.map((m, i) => (
           <article key={i} className={styles.card}>
-            {m.photo ? (
+            {m.photo && m.linkedin ? (
+              <a
+                href={m.linkedin}
+                target="_blank"
+                rel="noopener"
+                className={styles.photoLink}
+                aria-label={`${m.name} on LinkedIn`}
+              >
+                <Image src={m.photo} alt="" fill sizes="240px" className={styles.photo} />
+              </a>
+            ) : m.photo ? (
               <Image src={m.photo} alt="" fill sizes="240px" className={styles.photo} />
             ) : (
               <>

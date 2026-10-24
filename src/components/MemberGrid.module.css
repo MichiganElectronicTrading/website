@@ -21,6 +21,21 @@
 
 .photo { object-fit: cover; }
 
+/* The photo links to LinkedIn; the name and track text let clicks through to it. */
+.photoLink {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.photoLink:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -4px;
+}
+.photoLink ~ .name,
+.photoLink ~ .info {
+  pointer-events: none;
+}
+
 .cross {
   position: absolute;
   inset: 0;

@@ -19,6 +19,10 @@
   aspect-ratio: 1 / 1;
   border-bottom: 1.5px solid var(--ink);
 }
+/* Desk head photo linking to LinkedIn. */
+.headshotLink {
+  display: block;
+}
 .headshotImg {
   object-fit: cover;
   object-position: 50% 30%;

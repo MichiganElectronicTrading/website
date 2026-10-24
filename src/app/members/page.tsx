@@ -60,7 +60,17 @@ export default function MembersPage() {
         <div className={styles.heads}>
           {deskHeads.map((h, i) => (
             <article key={i} className={styles.headCard}>
-              {h.photo ? (
+              {h.linkedin ? (
+                <a href={h.linkedin} target="_blank" rel="noopener" className={styles.headshotLink}>
+                  {h.photo ? (
+                    <div className={styles.headshot}>
+                      <Image src={h.photo} alt={`${h.name} on LinkedIn`} fill sizes="300px" className={styles.headshotImg} />
+                    </div>
+                  ) : (
+                    <Placeholder label="[HEADSHOT]" className={styles.square} />
+                  )}
+                </a>
+              ) : h.photo ? (
                 <div className={styles.headshot}>
                   <Image src={h.photo} alt={h.name} fill sizes="300px" className={styles.headshotImg} />
                 </div>

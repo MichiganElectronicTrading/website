@@ -10,9 +10,10 @@ export type BoardMember = {
   linkedin: { href: string; label: string };
 };
 
-export type DeskHead = { name: string; desk: string; photo?: string };
+/** `linkedin` is a profile URL; when set, clicking the photo opens it. */
+export type DeskHead = { name: string; desk: string; photo?: string; linkedin?: string };
 
-export type Member = { name: string; track: Track; desk: string; photo?: string };
+export type Member = { name: string; track: Track; desk: string; photo?: string; linkedin?: string };
 
 export const board: BoardMember[] = [
   {
@@ -47,5 +48,11 @@ export const deskHeads: DeskHead[] = Array.from({ length: 4 }, () => ({
 }));
 
 export const members: Member[] = [
-  { name: "Avi Goldschmidt", track: "Engineering", desk: "[Desk name]", photo: "/headshot-avi-goldschmidt.jpg" },
+  {
+    name: "Avi Goldschmidt",
+    track: "Engineering",
+    desk: "[Desk name]",
+    photo: "/headshot-avi-goldschmidt.jpg",
+    linkedin: "https://www.linkedin.com/in/avi-goldschmidt/",
+  },
 ];
