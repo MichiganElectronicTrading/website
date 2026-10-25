@@ -1,4 +1,21 @@
 import { M_PATH, PINS_PATH } from "./MetMark";
+import {
+  clamp,
+  drawChevron,
+  drawDotGrid,
+  drawGlyph,
+  drawPad,
+  drawTag,
+  makePath,
+  measureTag,
+  TAG_HEIGHT,
+  pointAt,
+  roundRectPath,
+  strokePath,
+  tagLabel,
+  type PadKind,
+  type Pt,
+} from "./chipParts";
 import { CHIP_TICKERS, CURSOR_TICKERS, type Quote } from "@/data/quotes";
 
 /*
@@ -12,14 +29,9 @@ export const H = 440;
 
 const C = { cream: "#F4EFE4", navy: "#0B1B33", gold: "#D9A21B", goldInk: "#B8860B", goldHi: "#F6C453" };
 
-type Pt = [number, number];
-type Seg = { x0: number; y0: number; x1: number; y1: number; l: number; s0: number };
 type Packet = { s: number; dir: number };
-type NodeKind = "circle" | "square";
-type Wire = {
-  pts: Pt[];
-  segs: Seg[];
-  len: number;
+type NodeKind = PadKind;
+type Wire = ReturnType<typeof makePath> & {
   heat: number;
   gap: number;
   state: "on" | "unplug" | "off" | "plug";
@@ -97,7 +109,6 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
     clock = 0;
 
   const rand = (a: number, b: number) => a + Math.random() * (b - a);
-  const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
   const hex = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
   const mix = (a: string, b: string, t: number) => {
     const A = hex(a),
@@ -123,20 +134,9 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
 
   /* wires */
   function mkWire(pts: Pt[], opts: Partial<Wire>): Wire {
-    const segs: Seg[] = [];
-    let len = 0;
-    for (let i = 1; i < pts.length; i++) {
-      const [x0, y0] = pts[i - 1],
-        [x1, y1] = pts[i];
-      const l = Math.hypot(x1 - x0, y1 - y0);
-      segs.push({ x0, y0, x1, y1, l, s0: len });
-      len += l;
-    }
     return Object.assign(
       {
-        pts,
-        segs,
-        len,
+        ...makePath(pts),
         heat: 0,
         gap: 0,
         state: "on" as const,
@@ -147,16 +147,6 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       },
       opts,
     );
-  }
-  function pointAt(w: Wire, s: number) {
-    s = clamp(s, 0, w.len);
-    for (const g of w.segs) {
-      if (s <= g.s0 + g.l || g === w.segs[w.segs.length - 1]) {
-        const t = g.l ? (s - g.s0) / g.l : 0;
-        return { x: g.x0 + (g.x1 - g.x0) * t, y: g.y0 + (g.y1 - g.y0) * t, a: Math.atan2(g.y1 - g.y0, g.x1 - g.x0) };
-      }
-    }
-    return { x: w.pts[0][0], y: w.pts[0][1], a: 0 };
   }
   function distTo(w: Wire, x: number, y: number) {
     let d = Infinity;
@@ -246,8 +236,6 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
   let partClock = 0;
 
   /* tickers: real quotes only, nothing shown until /api/quotes answers */
-  const fmtPrice = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const fmtPct = (v: number) => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(2) + "%";
   const isUp = (t: Ticker) => t.changePct >= 0;
   function mkTicker(sym: string, kind: Ticker["kind"], q: Quote, ax: number, ay: number, extra?: Partial<Ticker>): Ticker {
     return Object.assign(
@@ -269,11 +257,7 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       extra,
     );
   }
-  function tickLabel(t: Ticker) {
-    const arrow = isUp(t) ? "▲" : "▼";
-    if (t.kind === "pct") return t.sym + " " + arrow + " " + fmtPct(t.changePct);
-    return t.sym + " " + fmtPrice(t.price) + " " + arrow;
-  }
+  const tickLabel = (t: Ticker) => tagLabel(t.sym, t.kind, t.price, t.changePct);
   let quotes = new Map<string, Quote>();
   /** One slot per fixed chip; empty when that symbol has no quote. */
   const fixed: (Ticker | null)[] = CHIP_TICKERS.map(() => null);
@@ -444,58 +428,12 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
 
   /* draw */
   const c = ctx;
-  function roundRect(x: number, y: number, w: number, h: number, r: number) {
-    c.beginPath();
-    if (c.roundRect) c.roundRect(x, y, w, h, r);
-    else c.rect(x, y, w, h);
-  }
-  function drawPolyline(w: Wire, upto: number) {
-    c.beginPath();
-    let first = true,
-      done = 0;
-    for (const g of w.segs) {
-      if (first) {
-        c.moveTo(g.x0, g.y0);
-        first = false;
-      }
-      if (done + g.l <= upto) {
-        c.lineTo(g.x1, g.y1);
-        done += g.l;
-      } else {
-        const t = (upto - done) / g.l;
-        if (t > 0) c.lineTo(g.x0 + (g.x1 - g.x0) * t, g.y0 + (g.y1 - g.y0) * t);
-        break;
-      }
-    }
-    c.stroke();
-  }
-  function chevron(x: number, y: number, a: number, size: number, color: string) {
-    c.save();
-    c.translate(x, y);
-    c.rotate(a);
-    c.beginPath();
-    c.moveTo(-size * 0.6, -size * 0.75);
-    c.lineTo(size * 0.6, 0);
-    c.lineTo(-size * 0.6, size * 0.75);
-    c.closePath();
-    c.fillStyle = color;
-    c.fill();
-    c.restore();
-  }
-  function node(kind: NodeKind, x: number, y: number, color: string, fill: string) {
-    c.lineWidth = 1.6;
-    c.strokeStyle = color;
-    c.fillStyle = fill;
-    if (kind === "square") {
-      c.beginPath();
-      c.rect(x - 4.5, y - 4.5, 9, 9);
-    } else {
-      c.beginPath();
-      c.arc(x, y, 4.5, 0, Math.PI * 2);
-    }
-    c.fill();
-    c.stroke();
-  }
+  const roundRect = (x: number, y: number, w: number, h: number, r: number) => roundRectPath(c, x, y, w, h, r);
+  const drawPolyline = (w: Wire, upto: number) => strokePath(c, w, upto);
+  const chevron = (x: number, y: number, a: number, size: number, color: string) =>
+    drawChevron(c, x, y, a, size, color);
+  const node = (kind: NodeKind, x: number, y: number, color: string, fill: string) =>
+    drawPad(c, kind, x, y, color, fill);
   function pinRect(side: "L" | "R", i: number): [number, number, number, number] {
     const y0 = [155, 213.6, 272.4][i];
     return side === "L" ? [172.6, y0, 19.4, 12.6] : [368, y0, 19.4, 12.6];
@@ -506,8 +444,7 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
     c.fillStyle = C.cream;
     c.fillRect(0, 0, W, H);
 
-    c.fillStyle = "rgba(11,27,51,0.10)";
-    for (let y = 2; y < H; y += 16) for (let x = 2; x < W; x += 16) c.fillRect(x - 1, y - 1, 2, 2);
+    drawDotGrid(c, W, H, "11,27,51", 0.1);
 
     if (ptr.p > 0.01) {
       const g = c.createRadialGradient(ptr.x, ptr.y, 0, ptr.x, ptr.y, 130);
@@ -624,57 +561,32 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       const gold = p.gold || (p.ambient && p.kind === "bit" && prox > 0.55 && p.ph > 3.6);
       const color = p.kind === "arrow" ? (isUpGlyph(p.ch) ? C.goldInk : C.navy) : gold ? C.goldInk : C.navy;
       const bounce = (tt: number) => -Math.abs(Math.sin(tt * p.bw + p.ph)) * p.amp;
-      c.font = "600 " + p.size + "px " + MONO;
-      c.fillStyle = color;
-      if (p.ghost) {
-        c.globalAlpha = a * 0.22;
-        c.fillText(p.ch, p.x, p.y + bounce(t - 0.14));
-      }
-      c.globalAlpha = a;
-      c.fillText(p.ch, p.x, p.y + bounce(t));
+      if (p.ghost) drawGlyph(c, p.ch, p.x, p.y + bounce(t - 0.14), p.size, color, a * 0.22, MONO);
+      drawGlyph(c, p.ch, p.x, p.y + bounce(t), p.size, color, a, MONO);
     }
     c.globalAlpha = 1;
 
-    const LABEL_FONT = "700 11px " + MONO;
-    const TAG_FONT = "600 8px " + MONO;
     for (const k of allTickers()) {
       const label = tickLabel(k);
       const up = isUp(k);
+      const closed = !k.marketOpen;
       const x = k.ax + Math.sin(t * 0.6 + k.ph) * 4;
       const by = -Math.abs(Math.sin(t * k.bw + k.ph)) * 4;
       const y = k.ay + by;
-      c.font = LABEL_FONT;
-      const labelW = c.measureText(label).width;
-      // Outside market hours the chip keeps the last price and day change, tagged "close".
-      c.font = TAG_FONT;
-      const tagW = k.marketOpen ? 0 : c.measureText("CLOSE").width + 6;
-      const w = labelW + tagW + 14,
-        h = 19;
-      const d = Math.hypot(x + w / 2 - ptr.x, y + h / 2 - ptr.y);
+      const { w } = measureTag(c, label, closed, MONO);
+      const d = Math.hypot(x + w / 2 - ptr.x, y + TAG_HEIGHT / 2 - ptr.y);
       const hot = clamp(1 - d / 150, 0, 1) * ptr.p;
       const color = up ? C.goldInk : C.navy;
       const base = (k.life === Infinity ? 0.62 + 0.38 * hot : 1) * k.alpha;
-      c.globalAlpha = base * 0.16;
-      c.strokeStyle = color;
-      c.lineWidth = 1;
-      roundRect(x, k.ay + 9 + by * 0.4, w, h, 3);
-      c.stroke();
-      c.globalAlpha = base;
-      c.fillStyle = k.flash > 0 ? (up ? "#FBF0D2" : "#E4E8EF") : C.cream;
-      roundRect(x, y, w, h, 3);
-      c.fill();
-      c.strokeStyle = hot > 0.3 || k.life !== Infinity ? C.gold : color;
-      c.lineWidth = hot > 0.3 ? 1.5 : 1;
-      roundRect(x, y, w, h, 3);
-      c.stroke();
-      c.fillStyle = color;
-      c.font = LABEL_FONT;
-      c.fillText(label, x + 7, y + 4.5);
-      if (!k.marketOpen) {
-        c.font = TAG_FONT;
-        c.globalAlpha = base * 0.7;
-        c.fillText("CLOSE", x + 7 + labelW + 6, y + 6.5);
-      }
+      // Outside market hours the chip keeps the last price and day change, tagged "close".
+      drawTag(c, x, y, label, closed, MONO, {
+        fill: k.flash > 0 ? (up ? "#FBF0D2" : "#E4E8EF") : C.cream,
+        stroke: hot > 0.3 || k.life !== Infinity ? C.gold : color,
+        lineWidth: hot > 0.3 ? 1.5 : 1,
+        text: color,
+        alpha: base,
+        shadow: { y: k.ay + 9 + by * 0.4, color, alpha: base * 0.16 },
+      });
     }
     c.globalAlpha = 1;
   }

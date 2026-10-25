@@ -1,3 +1,4 @@
+import CornerWiring from "./CornerWiring";
 import styles from "./PageHeader.module.css";
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 export default function PageHeader({ title, text, before, after }: Props) {
   return (
     <section className={`dark ${styles.band}`} data-reveal-root="">
+      <CornerWiring />
       <div className={styles.inner}>
         {before}
         <h1>{title}</h1>
