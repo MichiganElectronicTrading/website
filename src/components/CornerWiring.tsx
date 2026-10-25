@@ -36,6 +36,8 @@ const SYMBOLS = Array.from(new Set([...CHIP_TICKERS.map((t) => t.symbol), ...CUR
 /** Dots fade out over this distance from the corner. */
 const GRID_FADE = 520;
 const SIGNAL_LENGTH = 18;
+/** Fade in this long after the heading and intro text, via the shared reveal. */
+const FADE_FOLLOW_MS = 200;
 
 /** Stroke the part of a path between two distances along it. */
 function strokeRange(c: CanvasRenderingContext2D, p: Path, from: number, to: number) {
@@ -55,12 +57,14 @@ function strokeRange(c: CanvasRenderingContext2D, p: Path, from: number, to: num
 }
 
 export default function CornerWiring() {
+  const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const wrap = wrapRef.current;
     const cv = canvasRef.current;
     const ctx = cv?.getContext("2d");
-    if (!cv || !ctx) return;
+    if (!wrap || !cv || !ctx) return;
     const c = ctx;
     const mono =
       getComputedStyle(document.documentElement).getPropertyValue("--font-mono").trim() ||
@@ -152,9 +156,12 @@ export default function CornerWiring() {
       draw((now - start) / 1000);
       raf = requestAnimationFrame(frame);
     };
-    // Animate only while visible on screen and motion is allowed.
+    // The shared reveal fades the whole box in; bits and signals wait until it's done.
+    const fadedIn = () =>
+      !document.documentElement.classList.contains("reveal-pending") && !wrap.hasAttribute("data-reveal-state");
+    // Animate only once faded in, while visible on screen, and when motion is allowed.
     const sync = () => {
-      const run = !reduced && onScreen && !document.hidden;
+      const run = !reduced && fadedIn() && onScreen && !document.hidden;
       if (run && !raf) raf = requestAnimationFrame(frame);
       else if (!run && raf) {
         cancelAnimationFrame(raf);
@@ -174,6 +181,9 @@ export default function CornerWiring() {
     });
     io.observe(cv);
     document.addEventListener("visibilitychange", sync);
+    const revealWatch = new MutationObserver(sync);
+    revealWatch.observe(wrap, { attributes: true, attributeFilter: ["data-reveal-state"] });
+    revealWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     let alive = true;
     document.fonts
@@ -206,6 +216,7 @@ export default function CornerWiring() {
       alive = false;
       cancelAnimationFrame(raf);
       io.disconnect();
+      revealWatch.disconnect();
       stopQuotes();
       document.removeEventListener("visibilitychange", sync);
       window.removeEventListener("resize", onResize);
@@ -213,7 +224,13 @@ export default function CornerWiring() {
   }, []);
 
   return (
-    <div className={styles.corner} aria-hidden="true" data-reveal="off">
+    <div
+      ref={wrapRef}
+      className={styles.corner}
+      aria-hidden="true"
+      data-reveal="unit"
+      data-reveal-delay={FADE_FOLLOW_MS}
+    >
       <canvas ref={canvasRef} className={styles.canvas} />
     </div>
   );

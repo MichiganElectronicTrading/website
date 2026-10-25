@@ -13,6 +13,7 @@ import { useEffect } from "react";
  *
  * Opt out on any element (and its contents) with data-reveal="off".
  * Force an element to fade as one block with data-reveal="unit".
+ * Hold an element back with data-reveal-delay="200" (ms, added to any stagger).
  *
  * Elements are only hidden once this script runs. The inline script in the
  * layout hides section content from the first paint so nothing flashes, and
@@ -135,6 +136,7 @@ export default function Reveal() {
         later(() => clear(el), Math.max(REVEAL.scrambleDuration, REVEAL.lineDelay + REVEAL.lineDuration) + 50);
         return;
       }
+      delay += Number(el.getAttribute("data-reveal-delay")) || 0;
       (el as HTMLElement).style.setProperty("--reveal-delay", `${delay}ms`);
       el.setAttribute("data-reveal-state", "in");
       later(() => clear(el), REVEAL.fadeDuration + delay + 50);
