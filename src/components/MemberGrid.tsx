@@ -44,7 +44,7 @@ export default function MemberGrid() {
             <h3 className={styles.name}>{m.name}</h3>
             <div className={styles.info}>
               <span className={styles.track}>{m.track}</span>
-              <span className={styles.desk}>{m.desk}</span>
+              {m.desk && <span className={styles.desk}>{m.desk}</span>}
             </div>
           </article>
         ))}
