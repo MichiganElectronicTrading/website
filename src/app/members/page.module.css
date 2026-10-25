@@ -59,13 +59,13 @@
   font-weight: 600;
 }
 
+/* Fixed columns, so a short row keeps normal card widths and sits at the left. */
 .heads {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
   gap: 20px;
 }
 .headCard {
-  flex: 1 1 240px;
   min-width: 0;
   border: 1.5px solid var(--ink);
   display: flex;

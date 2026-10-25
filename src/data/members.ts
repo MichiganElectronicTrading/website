@@ -49,7 +49,6 @@ export const deskHeads: DeskHead[] = [
     photo: "/headshot-john-colyer.jpg",
     linkedin: "https://www.linkedin.com/in/john-colyer/",
   },
-  ...Array.from({ length: 3 }, () => ({ name: "[Name]", desk: "[Desk name]" })),
 ];
 
 export const members: Member[] = [
