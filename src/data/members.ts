@@ -42,10 +42,15 @@ export const board: BoardMember[] = [
   },
 ];
 
-export const deskHeads: DeskHead[] = Array.from({ length: 4 }, () => ({
-  name: "[Name]",
-  desk: "[Desk name]",
-}));
+export const deskHeads: DeskHead[] = [
+  {
+    name: "John Colyer",
+    desk: "Systematic Biotech",
+    photo: "/headshot-john-colyer.jpg",
+    linkedin: "https://www.linkedin.com/in/john-colyer/",
+  },
+  ...Array.from({ length: 3 }, () => ({ name: "[Name]", desk: "[Desk name]" })),
+];
 
 export const members: Member[] = [
   {
