@@ -15,8 +15,8 @@
 
 /* Shared classes from the designs' page-level CSS. */
 
-/* In-page links stop below the sticky header (76px tall). */
-html { scroll-padding-top: 76px; }
+/* In-page links stop below the sticky header (76px plus its 1px gold rule). */
+html { scroll-padding-top: 77px; }
 
 /* In-page links like the hero's scroll arrow glide instead of jumping. */
 @media (prefers-reduced-motion: no-preference) {
