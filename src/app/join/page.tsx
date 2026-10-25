@@ -36,7 +36,6 @@ export default function JoinPage() {
         <div className={styles.tracks}>
           {tracks.map((t) => (
             <div key={t.name} className={styles.track}>
-              <span className="lbl">{t.label}</span>
               <h2>{t.name}</h2>
               <p>{t.summary}</p>
               <div className={`lbl ${styles.lookFor}`}>What we look for</div>

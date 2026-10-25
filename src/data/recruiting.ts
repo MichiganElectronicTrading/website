@@ -29,7 +29,6 @@ export const recruiting = {
 
 export const tracks = [
   {
-    label: "Track A",
     name: "Trading Track",
     summary: "Research and run the strategies our desks trade.",
     lookFor: [
@@ -39,7 +38,6 @@ export const tracks = [
     ],
   },
   {
-    label: "Track B",
     name: "Engineering Track",
     summary: "Build the software and hardware our desks run on.",
     lookFor: [
