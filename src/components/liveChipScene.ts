@@ -1,4 +1,5 @@
 import { M_PATH, PINS_PATH } from "./MetMark";
+import { CHIP_TICKERS, CURSOR_TICKERS, type Quote } from "@/data/quotes";
 
 /*
  * Canvas drawing and animation for Home's About chip, ported from
@@ -52,20 +53,19 @@ type Part = {
 };
 type Ticker = {
   sym: string;
-  kind: "price" | "pct" | "n32";
-  val: number;
+  kind: "price" | "pct";
+  /** Real quote values from /api/quotes. */
+  price: number;
+  changePct: number;
+  marketOpen: boolean;
   ax: number;
   ay: number;
-  up: boolean;
-  next: number;
   flash: number;
   ph: number;
   bw: number;
   age: number;
   life: number;
   alpha: number;
-  step?: number;
-  dec?: number;
 };
 
 export type ChipScene = {
@@ -77,6 +77,8 @@ export type ChipScene = {
   redraw(): void;
   /** Settle the scene once and draw a still frame (reduced motion). */
   still(): void;
+  /** Feed in real quotes. `null` hides every ticker chip. */
+  setQuotes(quotes: Quote[] | null): void;
   /** Pointer handlers, attached by the caller. Mouse and pen only. */
   pointerMove(e: PointerEvent): void;
   pointerLeave(): void;
@@ -243,19 +245,20 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
   for (let i = 0; i < 14; i++) parts.push(mkPart("arrow", true));
   let partClock = 0;
 
-  /* tickers */
-  const fmtPrice = (v: number, d: number) =>
-    v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
-  function mkTicker(sym: string, kind: Ticker["kind"], val: number, ax: number, ay: number, extra?: Partial<Ticker>): Ticker {
+  /* tickers: real quotes only, nothing shown until /api/quotes answers */
+  const fmtPrice = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtPct = (v: number) => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(2) + "%";
+  const isUp = (t: Ticker) => t.changePct >= 0;
+  function mkTicker(sym: string, kind: Ticker["kind"], q: Quote, ax: number, ay: number, extra?: Partial<Ticker>): Ticker {
     return Object.assign(
       {
         sym,
         kind,
-        val,
+        price: q.price,
+        changePct: q.changePct,
+        marketOpen: q.marketOpen,
         ax,
         ay,
-        up: Math.random() < 0.5,
-        next: rand(0.4, 1.4),
         flash: 0,
         ph: rand(0, 6.28),
         bw: rand(1.6, 2.6),
@@ -267,50 +270,57 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
     );
   }
   function tickLabel(t: Ticker) {
-    const arrow = t.up ? "▲" : "▼";
-    if (t.kind === "pct") return t.sym + " " + arrow + " " + Math.abs(t.val).toFixed(2) + "%";
-    if (t.kind === "n32") {
-      const whole = Math.floor(t.val);
-      const n = Math.round((t.val - whole) * 32);
-      return t.sym + " " + whole + "’" + String(n).padStart(2, "0") + " " + arrow;
+    const arrow = isUp(t) ? "▲" : "▼";
+    if (t.kind === "pct") return t.sym + " " + arrow + " " + fmtPct(t.changePct);
+    return t.sym + " " + fmtPrice(t.price) + " " + arrow;
+  }
+  let quotes = new Map<string, Quote>();
+  /** One slot per fixed chip; empty when that symbol has no quote. */
+  const fixed: (Ticker | null)[] = CHIP_TICKERS.map(() => null);
+  let cursorTickers: Ticker[] = [];
+  const allTickers = () => [...fixed.filter((t): t is Ticker => t !== null), ...cursorTickers];
+
+  /** Copy a fresh quote into a chip, flashing it only if a shown value changed. */
+  function applyQuote(t: Ticker, q: Quote) {
+    if (q.price !== t.price || q.changePct !== t.changePct) t.flash = 0.3;
+    t.price = q.price;
+    t.changePct = q.changePct;
+    t.marketOpen = q.marketOpen;
+  }
+  function setQuotes(list: Quote[] | null) {
+    if (!list || list.length === 0) {
+      quotes = new Map();
+      fixed.fill(null);
+      cursorTickers = [];
+      return;
     }
-    return t.sym + " " + fmtPrice(t.val, t.dec || 2) + " " + arrow;
+    quotes = new Map(list.map((q) => [q.symbol, q]));
+    CHIP_TICKERS.forEach((slot, i) => {
+      const q = quotes.get(slot.symbol);
+      const t = fixed[i];
+      if (!q) fixed[i] = null;
+      else if (t) applyQuote(t, q);
+      else fixed[i] = mkTicker(slot.symbol, slot.kind, q, slot.ax, slot.ay);
+    });
+    cursorTickers = cursorTickers.filter((t) => {
+      const q = quotes.get(t.sym);
+      if (q) applyQuote(t, q);
+      return !!q;
+    });
   }
-  function stepTicker(t: Ticker) {
-    const before = t.val;
-    if (t.kind === "pct") t.val = clamp(t.val + rand(-0.06, 0.06), -4, 4);
-    else if (t.kind === "n32") t.val = Math.round((t.val + Math.round(rand(-2.5, 2.5)) / 32) * 32) / 32;
-    else t.val = Math.max(t.step!, t.val + t.step! * Math.round(rand(-3.5, 3.5)));
-    t.up = t.kind === "pct" ? t.val >= 0 : t.val >= before;
-    t.flash = 0.3;
-  }
-  const tickers: Ticker[] = [
-    mkTicker("ES", "price", 5812.25, 22, 22, { step: 0.25, dec: 2 }),
-    mkTicker("NQ", "pct", -0.42, 262, 16),
-    mkTicker("ZN", "n32", 110.5, 14, 122),
-    mkTicker("AAPL", "price", 228.1, 422, 238, { step: 0.01, dec: 2 }),
-    mkTicker("CL", "price", 71.84, 198, 324, { step: 0.01, dec: 2 }),
-    mkTicker("BTC", "pct", -1.2, 430, 396),
-    mkTicker("SPY", "pct", 0.8, 236, 404),
-  ];
-  tickers.forEach((t) => {
-    t.up = t.kind === "pct" ? t.val >= 0 : Math.random() < 0.6;
-  });
-  const POOL = ["NVDA", "TSLA", "MSFT", "META", "AMD", "GOOGL", "RTY", "GC"];
+
   let tickClock = 0;
   function addCursorTicker() {
-    if (tickers.filter((t) => t.life !== Infinity).length >= 3) return;
+    if (cursorTickers.length >= 3) return;
+    const pool = CURSOR_TICKERS.filter((s) => quotes.has(s));
+    if (pool.length === 0) return;
     for (let i = 0; i < 8; i++) {
       const x = ptr.x + rand(-120, 60),
         y = ptr.y + rand(-90, 80);
       if (x < 6 || x > W - 120 || y < 6 || y > H - 26 || inLogo(x + 50, y + 9) || inLogo(x, y) || inLogo(x + 100, y + 18))
         continue;
-      const t = mkTicker(POOL[Math.floor(Math.random() * POOL.length)], "pct", rand(-2.5, 2.5), x, y, {
-        life: rand(2, 3),
-        alpha: 0,
-      });
-      t.up = t.val >= 0;
-      tickers.push(t);
+      const sym = pool[Math.floor(Math.random() * pool.length)];
+      cursorTickers.push(mkTicker(sym, "pct", quotes.get(sym)!, x, y, { life: rand(2, 3), alpha: 0 }));
       return;
     }
   }
@@ -424,20 +434,12 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       addCursorTicker();
       tickClock = 1.1;
     }
-    for (let i = tickers.length - 1; i >= 0; i--) {
-      const k = tickers[i];
+    for (const k of allTickers()) {
       k.age += dt;
-      k.next -= dt;
-      if (k.next <= 0) {
-        stepTicker(k);
-        k.next = rand(0.5, 1.6);
-      }
       k.flash = Math.max(0, k.flash - dt);
-      if (k.life !== Infinity) {
-        k.alpha = Math.min(1, k.age / 0.3, Math.max(0, (k.life - k.age) / 0.4));
-        if (k.age > k.life) tickers.splice(i, 1);
-      }
+      if (k.life !== Infinity) k.alpha = Math.min(1, k.age / 0.3, Math.max(0, (k.life - k.age) / 0.4));
     }
+    cursorTickers = cursorTickers.filter((k) => k.age <= k.life);
   }
 
   /* draw */
@@ -633,17 +635,24 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
     }
     c.globalAlpha = 1;
 
-    c.font = "700 11px " + MONO;
-    for (const k of tickers) {
+    const LABEL_FONT = "700 11px " + MONO;
+    const TAG_FONT = "600 8px " + MONO;
+    for (const k of allTickers()) {
       const label = tickLabel(k);
+      const up = isUp(k);
       const x = k.ax + Math.sin(t * 0.6 + k.ph) * 4;
       const by = -Math.abs(Math.sin(t * k.bw + k.ph)) * 4;
       const y = k.ay + by;
-      const w = c.measureText(label).width + 14,
+      c.font = LABEL_FONT;
+      const labelW = c.measureText(label).width;
+      // Outside market hours the chip keeps the last price and day change, tagged "close".
+      c.font = TAG_FONT;
+      const tagW = k.marketOpen ? 0 : c.measureText("CLOSE").width + 6;
+      const w = labelW + tagW + 14,
         h = 19;
       const d = Math.hypot(x + w / 2 - ptr.x, y + h / 2 - ptr.y);
       const hot = clamp(1 - d / 150, 0, 1) * ptr.p;
-      const color = k.up ? C.goldInk : C.navy;
+      const color = up ? C.goldInk : C.navy;
       const base = (k.life === Infinity ? 0.62 + 0.38 * hot : 1) * k.alpha;
       c.globalAlpha = base * 0.16;
       c.strokeStyle = color;
@@ -651,7 +660,7 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       roundRect(x, k.ay + 9 + by * 0.4, w, h, 3);
       c.stroke();
       c.globalAlpha = base;
-      c.fillStyle = k.flash > 0 ? (k.up ? "#FBF0D2" : "#E4E8EF") : C.cream;
+      c.fillStyle = k.flash > 0 ? (up ? "#FBF0D2" : "#E4E8EF") : C.cream;
       roundRect(x, y, w, h, 3);
       c.fill();
       c.strokeStyle = hot > 0.3 || k.life !== Infinity ? C.gold : color;
@@ -659,7 +668,13 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       roundRect(x, y, w, h, 3);
       c.stroke();
       c.fillStyle = color;
+      c.font = LABEL_FONT;
       c.fillText(label, x + 7, y + 4.5);
+      if (!k.marketOpen) {
+        c.font = TAG_FONT;
+        c.globalAlpha = base * 0.7;
+        c.fillText("CLOSE", x + 7 + labelW + 6, y + 6.5);
+      }
     }
     c.globalAlpha = 1;
   }
@@ -685,6 +700,7 @@ export function createChipScene(cv: HTMLCanvasElement, monoFamily: string): Chip
       update(0.016);
       draw(clock);
     },
+    setQuotes,
     pointerMove(e) {
       if (e.pointerType === "touch") return;
       setPtr(e);

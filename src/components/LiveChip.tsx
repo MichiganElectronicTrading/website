@@ -2,7 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { createChipScene } from "./liveChipScene";
+import type { Quote } from "@/data/quotes";
 import styles from "./LiveChip.module.css";
+
+const QUOTES_REFRESH_MS = 60_000;
+/** After failed refreshes, real quotes older than this are hidden. */
+const QUOTES_STALE_MS = 5 * 60_000;
 
 /*
  * Animated chip illustration for Home's About section. The canvas is
@@ -79,6 +84,27 @@ export default function LiveChip() {
         if (alive && !raf) scene.redraw();
       });
 
+    // Real quotes for the ticker chips. Without any, the chips stay hidden.
+    let lastGood = 0;
+    const loadQuotes = async () => {
+      if (document.hidden && lastGood) return;
+      try {
+        const res = await fetch("/api/quotes");
+        if (!res.ok) throw new Error(String(res.status));
+        const data: unknown = await res.json();
+        if (!alive) return;
+        const list = Array.isArray(data) ? (data as Quote[]) : [];
+        scene.setQuotes(list);
+        if (list.length) lastGood = Date.now();
+      } catch {
+        // A missed refresh keeps the last real quotes for a few minutes, then hides them.
+        if (alive && Date.now() - lastGood > QUOTES_STALE_MS) scene.setQuotes(null);
+      }
+      if (alive && !raf) scene.redraw();
+    };
+    loadQuotes();
+    const quotesTimer = window.setInterval(loadQuotes, QUOTES_REFRESH_MS);
+
     const onMove = (e: PointerEvent) => scene.pointerMove(e);
     const onLeave = () => scene.pointerLeave();
     const onUp = (e: PointerEvent) => scene.pointerUp(e);
@@ -90,6 +116,7 @@ export default function LiveChip() {
 
     return () => {
       alive = false;
+      window.clearInterval(quotesTimer);
       cancelAnimationFrame(raf);
       raf = 0;
       motion.removeEventListener("change", onMotionChange);

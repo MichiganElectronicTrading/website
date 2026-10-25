@@ -17,6 +17,14 @@ To check a production build:
 npm run build
 ```
 
+## Environment variables
+
+| Name | Where | What it's for |
+|---|---|---|
+| `FINNHUB_API_KEY` | Server only (`.env.local` locally, Vercel project settings in production) | Stock and ETF quotes for the ticker chips in Home's Live Chip, fetched by `/api/quotes`. Get a free key at finnhub.io. |
+
+Without the key, the stock and ETF chips are left out. BTC still shows, since it comes from Coinbase's public API. If no quotes load at all, the chips are hidden instead of showing made-up numbers. Never put the key in client code or in a `NEXT_PUBLIC_` variable.
+
 ## Project layout
 
 - `src/app/`: pages (Home, Desks, Sponsors, Members, Join)
