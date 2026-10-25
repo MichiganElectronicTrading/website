@@ -59,4 +59,11 @@ export const members: Member[] = [
     photo: "/headshot-avi-goldschmidt.jpg",
     linkedin: "https://www.linkedin.com/in/avi-goldschmidt/",
   },
+  {
+    name: "Aman Patel",
+    track: "Trading",
+    desk: "[Desk name]",
+    photo: "/headshot-aman-patel.jpg",
+    linkedin: "https://www.linkedin.com/in/aman-patel-3b0b5b361/",
+  },
 ];
