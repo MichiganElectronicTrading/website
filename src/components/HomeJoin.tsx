@@ -4,11 +4,11 @@ import { recruiting } from "@/data/recruiting";
 import styles from "./HomeJoin.module.css";
 
 /** Home's Join section. Switches between closed and open with `recruiting.status`. */
-export default function HomeJoin({ label }: { label: string }) {
+export default function HomeJoin({ label, bg }: { label: string; bg: "cream" | "offWhite" }) {
   const open = recruiting.status === "open";
 
   return (
-    <Section id="join" bg="cream" pad={96} rule gap={40}>
+    <Section id="join" bg={bg} pad={96} rule gap={40}>
       <SectionLabel>{label}</SectionLabel>
       <div className={styles.row}>
         <div className={styles.copy}>

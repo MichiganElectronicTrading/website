@@ -26,7 +26,7 @@ Public site for Michigan Electronic Trading (MET), a University of Michigan stud
 | Light grey | `#ECEBE7` | Section background |
 | Ink | `#111111` | Text, borders, buttons |
 
-Sections alternate cream, then off-white, then light grey, as in the designs.
+Sections alternate cream and off-white, starting with cream, in the order they appear on the page (hidden sections are skipped). Light grey is no longer used for sections.
 
 ## Rules
 - **Content lives in `src/data/*.ts`.** That covers desks, members, board, sponsors, placements and recruiting. Components read from it and never hard-code lists.

@@ -69,7 +69,7 @@ export default function Home() {
       </Section>
 
       {hasSponsors && (
-        <Section bg="grey" pad={96} rule bare>
+        <Section bg="cream" pad={96} rule bare>
           <div className={styles.sponsorsHead}>
             <SectionLabel>{label.Sponsors}</SectionLabel>
           </div>
@@ -82,7 +82,7 @@ export default function Home() {
         </Section>
       )}
 
-      <HomeJoin label={label.Join} />
+      <HomeJoin label={label.Join} bg={hasSponsors ? "offWhite" : "cream"} />
     </>
   );
 }

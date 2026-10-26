@@ -10,8 +10,8 @@ export const metadata: Metadata = { title: "Sponsors" };
 export default function SponsorsPage() {
   const hasSponsors = sponsorTiers.length > 0;
   const label = numberSections([hasSponsors && "Our sponsors", "Why partner"]);
-  // Section colours follow the visible order: cream, then off-white, then grey.
-  const [whyBg, contactBg] = hasSponsors ? (["offWhite", "grey"] as const) : (["cream", "offWhite"] as const);
+  // Section colours alternate cream and off-white in the order they appear.
+  const [whyBg, contactBg] = hasSponsors ? (["offWhite", "cream"] as const) : (["cream", "offWhite"] as const);
 
   return (
     <>

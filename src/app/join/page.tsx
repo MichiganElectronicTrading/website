@@ -56,14 +56,13 @@ export default function JoinPage() {
             <li key={step.name} className={styles.step}>
               <span className="lbl">{String(i + 1).padStart(2, "0")} →</span>
               <span className={`hf ${styles.stepName}`}>{step.name}</span>
-              <span className={`lbl ${styles.muted}`}>{step.date}</span>
               <span className={styles.stepDesc}>{step.description}</span>
             </li>
           ))}
         </ol>
       </Section>
 
-      <Section bg="grey" pad={72} rule>
+      <Section bg="cream" pad={72} rule>
         <SectionLabel>{label.FAQ}</SectionLabel>
         <div className={styles.faq}>
           {faq.map((item) => (
@@ -80,7 +79,7 @@ export default function JoinPage() {
         </div>
       </Section>
 
-      <Section bg="cream" pad={72} rule bare>
+      <Section bg="offWhite" pad={72} rule bare>
         <CtaRow title="Still Have Questions?" text="Email the board and we'll get back to you.">
           <EmailLink variant="mail" className="btn fill">
             Email the Board
