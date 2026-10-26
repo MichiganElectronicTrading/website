@@ -80,6 +80,7 @@ export default function MembersPage() {
               <div className={styles.headBody}>
                 <h3>{h.name}</h3>
                 <span className="lbl">{h.desk}</span>
+                {h.education && <span className={styles.edu}>{h.education}</span>}
               </div>
             </article>
           ))}
