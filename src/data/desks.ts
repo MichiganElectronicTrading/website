@@ -51,6 +51,6 @@ export const desks: Desk[] = [
     name: "Sports Prediction Desk",
     stage: "Trading",
     head: "Mihir Epel",
-    image: "/desk-sports-prediction.webp",
+    image: "/desk-sports-prediction.jpg",
   },
 ];
