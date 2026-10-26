@@ -65,4 +65,16 @@ export const members: Member[] = [
     photo: "/headshot-aman-patel.jpg",
     linkedin: "https://www.linkedin.com/in/aman-patel-3b0b5b361/",
   },
+  {
+    name: "Dhruv Aron",
+    track: "Engineering",
+    photo: "/headshot-dhruv-aron.jpg",
+    linkedin: "https://www.linkedin.com/in/dhruvaron/",
+  },
+  {
+    name: "Kelly Bae",
+    track: "Engineering",
+    photo: "/headshot-kelly-bae.jpg",
+    linkedin: "https://www.linkedin.com/in/kelly-bae-01bb3a43a/",
+  },
 ];
