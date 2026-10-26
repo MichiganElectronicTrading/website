@@ -19,9 +19,8 @@ export default function Header() {
   return (
     <header className={`dark ${styles.bar}`}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand}>
+        <Link href="/" className={styles.brand} aria-label={`${site.name} home`}>
           <MetMark width={42} height={34} />
-          <span className={`hf ${styles.name}`}>{site.name}</span>
         </Link>
         <nav aria-label="Main" className={styles.nav}>
           {links.map((link) => {
