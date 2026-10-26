@@ -86,13 +86,13 @@ export default function MembersPage() {
         </div>
       </Section>
 
-      <Section bg="grey" pad={72} rule>
+      <Section bg="cream" pad={72} rule>
         <SectionLabel>{label["General members"]}</SectionLabel>
         <MemberGrid />
       </Section>
 
       {hasPlacements && (
-        <Section bg="cream" pad={72} rule bare>
+        <Section bg="offWhite" pad={72} rule bare>
           <div className={styles.placementsHead}>
             <SectionLabel>{label["Member Placements"]}</SectionLabel>
           </div>
