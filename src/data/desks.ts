@@ -1,4 +1,4 @@
-export type DeskStage = "Research" | "Execution";
+export type DeskStage = "Research" | "Trading";
 
 export type Stage = {
   n: string;
@@ -55,10 +55,10 @@ const placeholderDesk = (stage: DeskStage): Desk => ({
 });
 
 export const desks: Desk[] = [
-  placeholderDesk("Execution"),
+  placeholderDesk("Trading"),
   placeholderDesk("Research"),
   placeholderDesk("Research"),
-  placeholderDesk("Execution"),
+  placeholderDesk("Trading"),
   placeholderDesk("Research"),
   placeholderDesk("Research"),
 ];

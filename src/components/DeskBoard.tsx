@@ -6,7 +6,7 @@ import Placeholder from "./Placeholder";
 import { desks } from "@/data/desks";
 import styles from "./DeskBoard.module.css";
 
-const FILTERS = ["All", "Research", "Execution"] as const;
+const FILTERS = ["All", "Research", "Trading"] as const;
 
 export default function DeskBoard() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
@@ -23,7 +23,7 @@ export default function DeskBoard() {
               <div className={styles.titleRow}>
                 <h3>{desk.name}</h3>
                 <span className={`lbl ${styles.badge}`}>
-                  {desk.stage === "Execution" ? "● Execution" : "○ Research"}
+                  {desk.stage === "Trading" ? "● Trading" : "○ Research"}
                 </span>
               </div>
               <p>{desk.summary}</p>
