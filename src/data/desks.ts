@@ -12,10 +12,11 @@ export type Stage = {
 export type Desk = {
   name: string;
   stage: DeskStage;
-  summary: string;
+  /** One or two lines on the strategy or project. Leave out until written. */
+  summary?: string;
   head: string;
-  trading: string;
-  eng: string;
+  /** Card image under /public. Leave out to show the placeholder box. */
+  image?: string;
 };
 
 export const stages: Stage[] = [
@@ -45,20 +46,11 @@ export const stages: Stage[] = [
   },
 ];
 
-const placeholderDesk = (stage: DeskStage): Desk => ({
-  name: "[Desk name]",
-  stage,
-  summary: "[Two lines on the desk's strategy or project.]",
-  head: "[Name]",
-  trading: "[N]",
-  eng: "[N]",
-});
-
 export const desks: Desk[] = [
-  placeholderDesk("Trading"),
-  placeholderDesk("Research"),
-  placeholderDesk("Research"),
-  placeholderDesk("Trading"),
-  placeholderDesk("Research"),
-  placeholderDesk("Research"),
+  {
+    name: "Sports Prediction Desk",
+    stage: "Trading",
+    head: "Mihir Epel",
+    image: "/desk-sports-prediction.webp",
+  },
 ];

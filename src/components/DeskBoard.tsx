@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import FilterButtons from "./FilterButtons";
 import Placeholder from "./Placeholder";
 import { desks } from "@/data/desks";
@@ -18,7 +19,13 @@ export default function DeskBoard() {
       <div className={styles.grid}>
         {shown.map((desk, i) => (
           <article key={i} className={styles.card}>
-            <Placeholder label="[DESK VISUAL]" className={styles.visual} />
+            {desk.image ? (
+              <div className={`${styles.visual} ${styles.photo}`}>
+                <Image src={desk.image} alt="" fill sizes="(min-width: 1200px) 384px, 100vw" className={styles.photoImg} />
+              </div>
+            ) : (
+              <Placeholder label="[DESK VISUAL]" className={styles.visual} />
+            )}
             <div className={styles.body}>
               <div className={styles.titleRow}>
                 <h3>{desk.name}</h3>
@@ -26,12 +33,9 @@ export default function DeskBoard() {
                   {desk.stage === "Trading" ? "● Trading" : "○ Research"}
                 </span>
               </div>
-              <p>{desk.summary}</p>
+              {desk.summary && <p>{desk.summary}</p>}
               <div className={`lbl ${styles.meta}`}>
                 <span>Head: {desk.head}</span>
-                <span>
-                  {desk.trading} trading · {desk.eng} eng
-                </span>
               </div>
             </div>
           </article>
