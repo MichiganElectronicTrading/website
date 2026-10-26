@@ -14,8 +14,6 @@ export type BoardMember = {
 export type DeskHead = {
   name: string;
   desk: string;
-  /** Degree, major and grad year, e.g. "B.S.E. Computer Science · 2029". */
-  education?: string;
   photo?: string;
   linkedin?: string;
 };
@@ -54,7 +52,6 @@ export const deskHeads: DeskHead[] = [
   {
     name: "John Colyer",
     desk: "Systematic Biotech",
-    education: "B.S.E. Biomedical Engineering · 2029",
     photo: "/headshot-john-colyer.jpg",
     linkedin: "https://www.linkedin.com/in/john-colyer/",
   },
