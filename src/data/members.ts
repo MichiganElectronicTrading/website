@@ -28,7 +28,7 @@ export const board: BoardMember[] = [
   {
     name: "Mihir Epel",
     role: "Director of Engineering",
-    title: "Founding Partner",
+    title: "Founding Partner · Desk Head",
     education: "B.S.E. Computer Engineering · 2028",
     photo: "/headshot-mihir-epel.jpg",
     linkedin: { href: "https://www.linkedin.com/in/mihirepel/", label: "LinkedIn →" },
