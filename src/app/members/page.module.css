@@ -62,7 +62,7 @@
 /* Fixed columns, so a short row keeps normal card widths and sits at the left. */
 .heads {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: 20px;
 }
 .headCard {
