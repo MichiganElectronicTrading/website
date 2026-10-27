@@ -35,7 +35,7 @@ export default function DeskBoard() {
               </div>
               {desk.summary && <p>{desk.summary}</p>}
               <div className={`lbl ${styles.meta}`}>
-                <span>Head: {desk.head}</span>
+                <span>Desk Head: {desk.head}</span>
               </div>
             </div>
           </article>
