@@ -26,6 +26,8 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.michiganelectronictrading.com"),
   title: { default: site.name, template: `%s · ${site.name}` },
   description: site.tagline,
+  // Proves ownership to Google Search Console.
+  verification: { google: "YVNv1BCW_PKx0ZVXRB4F0sljVItKhDZ2bOJM3X6w76U" },
   // Served from public/ so the URLs never change; Google wants a stable favicon URL.
   icons: {
     icon: [
