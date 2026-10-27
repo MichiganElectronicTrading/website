@@ -4,6 +4,8 @@ export type BoardMember = {
   name: string;
   role: string;
   title: string;
+  /** Desk this board member also heads; shown as its own "Desk Head · …" line. */
+  deskHead?: string;
   education: string;
   /** Path under /public. Leave out to show the headshot placeholder. */
   photo?: string;
@@ -33,7 +35,8 @@ export const board: BoardMember[] = [
   {
     name: "Mihir Epel",
     role: "Director of Engineering",
-    title: "Founding Partner · Desk Head",
+    title: "Founding Partner",
+    deskHead: "Sports Prediction",
     education: "B.S.E. Computer Engineering · 2028",
     photo: "/headshot-mihir-epel.jpg",
     linkedin: { href: "https://www.linkedin.com/in/mihirepel/", label: "LinkedIn →" },

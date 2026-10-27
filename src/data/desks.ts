@@ -48,7 +48,7 @@ export const stages: Stage[] = [
 
 export const desks: Desk[] = [
   {
-    name: "Sports Prediction Desk",
+    name: "Sports Prediction",
     stage: "Trading",
     head: "Mihir Epel",
     image: "/desk-sports-prediction.jpg",

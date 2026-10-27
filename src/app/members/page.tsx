@@ -40,6 +40,7 @@ export default function MembersPage() {
                   <h3>{b.name}</h3>
                   <span className={styles.role}>{b.role}</span>
                   <span className={`lbl ${styles.muted}`}>{b.title}</span>
+                  {b.deskHead && <span className={`lbl ${styles.muted}`}>Desk Head · {b.deskHead}</span>}
                   <span className={styles.edu}>{b.education}</span>
                   <a
                     href={b.linkedin.href}
