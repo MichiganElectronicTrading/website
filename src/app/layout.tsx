@@ -23,9 +23,17 @@ const mono = Red_Hat_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://michiganelectronictrading.com"),
+  metadataBase: new URL("https://www.michiganelectronictrading.com"),
   title: { default: site.name, template: `%s · ${site.name}` },
   description: site.tagline,
+  // Served from public/ so the URLs never change; Google wants a stable favicon URL.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
