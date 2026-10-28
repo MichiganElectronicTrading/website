@@ -36,6 +36,10 @@ Without the key, the stock and ETF chips are left out. BTC still shows, since it
 
 Text and lists live in `src/data/*.ts`, so most updates don't need component changes. To open or close recruiting, set `recruiting.status` to `"open"` or `"closed"` in `src/data/recruiting.ts`.
 
+## Short links
+
+`links.json` maps short names to destinations, for QR codes: `{ "qr": "https://..." }` makes `/qr` redirect there. Redirects are temporary (307), so changing a destination takes effect on the next deploy. A name that clashes with an existing page fails the build.
+
 ## Deploying
 
 Vercel deploys `main` to production and builds a preview for every other branch.
