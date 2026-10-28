@@ -85,4 +85,10 @@ export const members: Member[] = [
     photo: "/headshot-kelly-bae.jpg",
     linkedin: "https://www.linkedin.com/in/kelly-bae-01bb3a43a/",
   },
+  {
+    name: "Santiago Caravia Perry",
+    track: "Trading",
+    photo: "/headshot-santiago-caravia-perry.jpg",
+    linkedin: "https://www.linkedin.com/in/santiagocaravia/",
+  },
 ];
