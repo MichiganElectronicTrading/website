@@ -28,7 +28,7 @@ export default function DeskBoard() {
             )}
             <div className={styles.body}>
               <div className={styles.titleRow}>
-                <h3>{desk.name}</h3>
+                <h2>{desk.name}</h2>
                 <span className={`lbl ${styles.badge}`}>
                   {desk.stage === "Trading" ? "● Trading" : "○ Research"}
                 </span>

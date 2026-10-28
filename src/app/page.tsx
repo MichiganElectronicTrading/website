@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Section, { SectionLabel, numberSections } from "@/components/Section";
@@ -11,6 +12,12 @@ import { site } from "@/data/site";
 import hero from "../../public/hero-law-quad.jpg";
 import styles from "./page.module.css";
 
+export const metadata: Metadata = {
+  title: { absolute: `${site.name} (MET) · University of Michigan` },
+  description: site.tagline,
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   const hasSponsors = allSponsors.length > 0;
   const label = numberSections(["About", "Desks", hasSponsors && "Sponsors", "Join"]);
@@ -23,7 +30,7 @@ export default function Home() {
           <div className={styles.heroShade} />
         </div>
         <div className={styles.heroInner}>
-          <MetMark width={176} height={144} label="Logo" />
+          <MetMark width={176} height={144} label="MET logo" />
           <h1>{site.name}</h1>
           <p>{site.tagline}</p>
         </div>

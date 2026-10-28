@@ -9,7 +9,14 @@ import { board, deskHeads } from "@/data/members";
 import { placements, showPlacements } from "@/data/placements";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = { title: "Members" };
+/** Header intro, also used as the meta description. */
+const intro = "MET is made up of traders and engineers from across the University of Michigan.";
+
+export const metadata: Metadata = {
+  title: "Members",
+  description: intro,
+  alternates: { canonical: "/members" },
+};
 
 const hasPlacements = showPlacements && placements.length > 0;
 const label = numberSections(["The Board", "Desk Heads", "General members", hasPlacements && "Member Placements"]);
@@ -19,7 +26,7 @@ export default function MembersPage() {
     <>
       <PageHeader
         title="Members"
-        text="MET is made up of traders and engineers from across the University of Michigan."
+        text={intro}
       />
 
       <Section bg="cream" pad={72}>
@@ -37,7 +44,7 @@ export default function MembersPage() {
                   <Placeholder label="[HEADSHOT]" className={styles.square} />
                 )}
                 <div className={styles.boardBody}>
-                  <h3>{b.name}</h3>
+                  <h2>{b.name}</h2>
                   <span className={styles.role}>{b.role}</span>
                   <span className={`lbl ${styles.muted}`}>{b.title}</span>
                   {b.deskHead && <span className={`lbl ${styles.muted}`}>Desk Head · {b.deskHead}</span>}
@@ -79,7 +86,7 @@ export default function MembersPage() {
                 <Placeholder label="[HEADSHOT]" className={styles.square} />
               )}
               <div className={styles.headBody}>
-                <h3>{h.name}</h3>
+                <h2>{h.name}</h2>
                 <span className="lbl">{h.desk}</span>
               </div>
             </article>

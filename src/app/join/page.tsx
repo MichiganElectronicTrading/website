@@ -6,7 +6,14 @@ import { faq, recruiting, tracks } from "@/data/recruiting";
 import EmailLink from "@/components/EmailLink";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = { title: "Join" };
+/** Header intro, also used as the meta description. */
+const intro = `We're looking for traders and engineers who want to build real trading systems. ${recruiting.term} recruiting starts at Winterfest.`;
+
+export const metadata: Metadata = {
+  title: "Join",
+  description: intro,
+  alternates: { canonical: "/join" },
+};
 
 const label = numberSections(["Tracks", "Process", "FAQ"]);
 
@@ -17,7 +24,7 @@ export default function JoinPage() {
     <>
       <PageHeader
         title="Join MET"
-        text={`We're looking for traders and engineers who want to build real trading systems. ${recruiting.term} recruiting starts at Winterfest.`}
+        text={intro}
         before={<StatusPill open={open} tone="dark" />}
         after={
           <a

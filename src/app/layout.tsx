@@ -23,7 +23,7 @@ const mono = Red_Hat_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.michiganelectronictrading.com"),
+  metadataBase: new URL(site.url),
   title: { default: site.name, template: `%s · ${site.name}` },
   description: site.tagline,
   // Proves ownership to Google Search Console.
@@ -35,6 +35,26 @@ export const metadata: Metadata = {
       { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],
     apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
+};
+
+/** Organization structured data for search engines. No claim of official university affiliation. */
+const isRealLink = (url: string) => /^https?:\/\/[^/]+\.[^/]+/.test(url);
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  alternateName: "MET",
+  url: site.url,
+  logo: `${site.url}/icon.png`,
+  email: site.email,
+  description: site.tagline,
+  sameAs: [site.linkedin, site.instagram].filter(isRealLink),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ann Arbor",
+    addressRegion: "MI",
+    addressCountry: "US",
   },
 };
 
@@ -56,6 +76,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <Reveal />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
+        />
       </body>
     </html>
   );

@@ -5,7 +5,14 @@ import { sponsorTiers, whyPartner } from "@/data/sponsors";
 import EmailLink from "@/components/EmailLink";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = { title: "Sponsors" };
+/** Header intro, also used as the meta description. */
+const intro = "Sponsors fund the hardware, data, and capital our desks run on. They also get inside access to how we operate and what we've been building.";
+
+export const metadata: Metadata = {
+  title: "Sponsors",
+  description: intro,
+  alternates: { canonical: "/sponsors" },
+};
 
 export default function SponsorsPage() {
   const hasSponsors = sponsorTiers.length > 0;
@@ -17,7 +24,7 @@ export default function SponsorsPage() {
     <>
       <PageHeader
         title="Sponsors"
-        text="Sponsors fund the hardware, data, and capital our desks run on. They also get inside access to how we operate and what we've been building."
+        text={intro}
       />
 
       {hasSponsors && (
