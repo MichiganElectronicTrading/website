@@ -60,7 +60,7 @@ export const deskHeads: DeskHead[] = [
   },
 ];
 
-export const members: Member[] = [
+const memberList: Member[] = [
   {
     name: "Avi Goldschmidt",
     track: "Engineering",
@@ -98,3 +98,11 @@ export const members: Member[] = [
     linkedin: "https://www.linkedin.com/in/sabinecastro/",
   },
 ];
+
+/** Last name: everything after the first word, so "Caravia Perry" sorts under C. */
+const lastName = (name: string) => name.split(" ").slice(1).join(" ");
+
+/** General members, sorted alphabetically by last name, then first name. */
+export const members: Member[] = [...memberList].sort(
+  (a, b) => lastName(a.name).localeCompare(lastName(b.name)) || a.name.localeCompare(b.name),
+);
