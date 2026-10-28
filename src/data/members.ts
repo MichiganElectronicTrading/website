@@ -91,4 +91,10 @@ export const members: Member[] = [
     photo: "/headshot-santiago-caravia-perry.jpg",
     linkedin: "https://www.linkedin.com/in/santiagocaravia/",
   },
+  {
+    name: "Sabine Castro",
+    track: "Engineering",
+    photo: "/headshot-sabine-castro.jpg",
+    linkedin: "https://www.linkedin.com/in/sabinecastro/",
+  },
 ];
