@@ -97,6 +97,12 @@ const memberList: Member[] = [
     photo: "/headshot-sabine-castro.jpg",
     linkedin: "https://www.linkedin.com/in/sabinecastro/",
   },
+  {
+    name: "Nideesh Srivatsavan",
+    track: "Trading",
+    photo: "/headshot-nideesh-srivatsavan.jpg",
+    linkedin: "https://www.linkedin.com/in/nideeshsri/",
+  },
 ];
 
 /** Last name: everything after the first word, so "Caravia Perry" sorts under C. */
