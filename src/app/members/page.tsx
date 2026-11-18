@@ -5,7 +5,7 @@ import Section, { SectionLabel, numberSections } from "@/components/Section";
 import Placeholder from "@/components/Placeholder";
 import MemberGrid from "@/components/MemberGrid";
 import LogoMarquee from "@/components/LogoMarquee";
-import { board, deskHeads } from "@/data/members";
+import { advisors, board, deskHeads } from "@/data/members";
 import { placements, showPlacements } from "@/data/placements";
 import styles from "./page.module.css";
 
@@ -18,8 +18,44 @@ export const metadata: Metadata = {
   alternates: { canonical: "/members" },
 };
 
+const hasAdvisors = advisors.length > 0;
 const hasPlacements = showPlacements && placements.length > 0;
-const label = numberSections(["The Board", "Desk Heads", "General members", hasPlacements && "Member Placements"]);
+const label = numberSections([
+  "The Board",
+  "Desk Heads",
+  hasAdvisors && "Advisors",
+  "General members",
+  hasPlacements && "Member Placements",
+]);
+// Sections after Desk Heads alternate cream and off-white in the order they appear.
+const membersBg = hasAdvisors ? "offWhite" : "cream";
+const placementsBg = membersBg === "cream" ? "offWhite" : "cream";
+
+/** Photo card used for desk heads and advisors. The photo links to LinkedIn when set. */
+function PersonCard({ name, line, photo, linkedin }: { name: string; line: string; photo?: string; linkedin?: string }) {
+  const headshot = photo ? (
+    <div className={styles.headshot}>
+      <Image src={photo} alt={linkedin ? `${name} on LinkedIn` : name} fill sizes="300px" className={styles.headshotImg} />
+    </div>
+  ) : (
+    <Placeholder label="[HEADSHOT]" className={styles.square} />
+  );
+  return (
+    <article className={styles.headCard}>
+      {linkedin ? (
+        <a href={linkedin} target="_blank" rel="noopener" className={styles.headshotLink}>
+          {headshot}
+        </a>
+      ) : (
+        headshot
+      )}
+      <div className={styles.headBody}>
+        <h2>{name}</h2>
+        <span className="lbl">{line}</span>
+      </div>
+    </article>
+  );
+}
 
 export default function MembersPage() {
   return (
@@ -67,40 +103,29 @@ export default function MembersPage() {
         <SectionLabel>{label["Desk Heads"]}</SectionLabel>
         <div className={styles.heads}>
           {deskHeads.map((h, i) => (
-            <article key={i} className={styles.headCard}>
-              {h.linkedin ? (
-                <a href={h.linkedin} target="_blank" rel="noopener" className={styles.headshotLink}>
-                  {h.photo ? (
-                    <div className={styles.headshot}>
-                      <Image src={h.photo} alt={`${h.name} on LinkedIn`} fill sizes="300px" className={styles.headshotImg} />
-                    </div>
-                  ) : (
-                    <Placeholder label="[HEADSHOT]" className={styles.square} />
-                  )}
-                </a>
-              ) : h.photo ? (
-                <div className={styles.headshot}>
-                  <Image src={h.photo} alt={h.name} fill sizes="300px" className={styles.headshotImg} />
-                </div>
-              ) : (
-                <Placeholder label="[HEADSHOT]" className={styles.square} />
-              )}
-              <div className={styles.headBody}>
-                <h2>{h.name}</h2>
-                <span className="lbl">{h.desk}</span>
-              </div>
-            </article>
+            <PersonCard key={i} name={h.name} line={h.desk} photo={h.photo} linkedin={h.linkedin} />
           ))}
         </div>
       </Section>
 
-      <Section bg="cream" pad={72} rule>
+      {hasAdvisors && (
+        <Section bg="cream" pad={72} rule>
+          <SectionLabel>{label["Advisors"]}</SectionLabel>
+          <div className={styles.heads}>
+            {advisors.map((a, i) => (
+              <PersonCard key={i} name={a.name} line="Advisor" photo={a.photo} linkedin={a.linkedin} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      <Section bg={membersBg} pad={72} rule>
         <SectionLabel>{label["General members"]}</SectionLabel>
         <MemberGrid />
       </Section>
 
       {hasPlacements && (
-        <Section bg="offWhite" pad={72} rule bare>
+        <Section bg={placementsBg} pad={72} rule bare>
           <div className={styles.placementsHead}>
             <SectionLabel>{label["Member Placements"]}</SectionLabel>
           </div>

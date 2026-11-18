@@ -20,6 +20,13 @@ export type DeskHead = {
   linkedin?: string;
 };
 
+/** `linkedin` is a profile URL; when set, clicking the photo opens it. */
+export type Advisor = {
+  name: string;
+  photo?: string;
+  linkedin?: string;
+};
+
 /** `desk` is optional; members without one show just their track. */
 export type Member = { name: string; track: Track; desk?: string; photo?: string; linkedin?: string };
 
@@ -57,6 +64,15 @@ export const deskHeads: DeskHead[] = [
     desk: "Systematic Biotech",
     photo: "/headshot-john-colyer.jpg",
     linkedin: "https://www.linkedin.com/in/john-colyer/",
+  },
+];
+
+/** The Advisors section on the Members page is hidden while this is empty. */
+export const advisors: Advisor[] = [
+  {
+    name: "Aadi Samineni",
+    photo: "/headshot-aadi-samineni.jpg",
+    linkedin: "https://www.linkedin.com/in/aadisamineni/",
   },
 ];
 
