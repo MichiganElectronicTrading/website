@@ -1,4 +1,5 @@
-export type Track = "Trading" | "Engineering";
+/** "Advisor" shows in place of a track and only appears under the All filter. */
+export type Track = "Trading" | "Engineering" | "Advisor";
 
 export type BoardMember = {
   name: string;
@@ -16,13 +17,6 @@ export type BoardMember = {
 export type DeskHead = {
   name: string;
   desk: string;
-  photo?: string;
-  linkedin?: string;
-};
-
-/** `linkedin` is a profile URL; when set, clicking the photo opens it. */
-export type Advisor = {
-  name: string;
   photo?: string;
   linkedin?: string;
 };
@@ -64,15 +58,6 @@ export const deskHeads: DeskHead[] = [
     desk: "Systematic Biotech",
     photo: "/headshot-john-colyer.jpg",
     linkedin: "https://www.linkedin.com/in/john-colyer/",
-  },
-];
-
-/** The Advisors section on the Members page is hidden while this is empty. */
-export const advisors: Advisor[] = [
-  {
-    name: "Aadi Samineni",
-    photo: "/headshot-aadi-samineni.jpg",
-    linkedin: "https://www.linkedin.com/in/aadisamineni/",
   },
 ];
 
@@ -118,6 +103,12 @@ const memberList: Member[] = [
     track: "Trading",
     photo: "/headshot-nideesh-srivatsavan.jpg",
     linkedin: "https://www.linkedin.com/in/nideeshsri/",
+  },
+  {
+    name: "Aadi Samineni",
+    track: "Advisor",
+    photo: "/headshot-aadi-samineni.jpg",
+    linkedin: "https://www.linkedin.com/in/aadisamineni/",
   },
 ];
 
