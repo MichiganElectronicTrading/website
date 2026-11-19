@@ -43,7 +43,7 @@ export default function MemberGrid() {
             )}
             <h2 className={styles.name}>{m.name}</h2>
             <div className={styles.info}>
-              <span className={styles.track}>{m.track}</span>
+              <span className={styles.track}>{m.advisor ? `Advisor + ${m.track}` : m.track}</span>
               {m.desk && <span className={styles.desk}>{m.desk}</span>}
             </div>
           </article>

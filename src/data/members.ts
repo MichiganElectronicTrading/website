@@ -1,5 +1,4 @@
-/** "Advisor" shows in place of a track and only appears under the All filter. */
-export type Track = "Trading" | "Engineering" | "Advisor";
+export type Track = "Trading" | "Engineering";
 
 export type BoardMember = {
   name: string;
@@ -21,8 +20,8 @@ export type DeskHead = {
   linkedin?: string;
 };
 
-/** `desk` is optional; members without one show just their track. */
-export type Member = { name: string; track: Track; desk?: string; photo?: string; linkedin?: string };
+/** `desk` is optional; members without one show just their track. `advisor` shows as "Advisor + <track>". */
+export type Member = { name: string; track: Track; advisor?: boolean; desk?: string; photo?: string; linkedin?: string };
 
 export const board: BoardMember[] = [
   {
@@ -106,7 +105,8 @@ const memberList: Member[] = [
   },
   {
     name: "Aadi Samineni",
-    track: "Advisor",
+    track: "Trading",
+    advisor: true,
     photo: "/headshot-aadi-samineni.jpg",
     linkedin: "https://www.linkedin.com/in/aadisamineni/",
   },
