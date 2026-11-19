@@ -81,7 +81,13 @@
   gap: 2px;
   text-align: right;
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  /* Same faint outline as the names, so white text holds up on white shirts. */
+  text-shadow:
+    -1px -1px 0 rgba(0, 0, 0, 0.35),
+    1px -1px 0 rgba(0, 0, 0, 0.35),
+    -1px 1px 0 rgba(0, 0, 0, 0.35),
+    1px 1px 0 rgba(0, 0, 0, 0.35),
+    0 1px 3px rgba(0, 0, 0, 0.6);
 }
 .track {
   font-size: 15px;
