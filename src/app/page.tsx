@@ -6,7 +6,6 @@ import StageCards from "@/components/StageCards";
 import LiveChip from "@/components/LiveChip";
 import HomeJoin from "@/components/HomeJoin";
 import MetMark from "@/components/MetMark";
-import { allSponsors } from "@/data/sponsors";
 import { site } from "@/data/site";
 import hero from "../../public/hero-law-quad.jpg";
 import styles from "./page.module.css";
@@ -18,8 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const hasSponsors = allSponsors.length > 0;
-  const label = numberSections(["About", "Desks", hasSponsors && "Sponsors", "Join"]);
+  const label = numberSections(["About", "Desks", "Join"]);
 
   return (
     <>
@@ -74,20 +72,7 @@ export default function Home() {
         </Link>
       </Section>
 
-      {hasSponsors && (
-        <Section bg="cream" pad={96} rule bare>
-          <div className={styles.sponsorsHead}>
-            <SectionLabel>{label.Sponsors}</SectionLabel>
-          </div>
-          <div className={styles.sponsorsFoot}>
-            <Link href="/sponsors" className="btn">
-              Become a Sponsor
-            </Link>
-          </div>
-        </Section>
-      )}
-
-      <HomeJoin label={label.Join} bg={hasSponsors ? "offWhite" : "cream"} />
+      <HomeJoin label={label.Join} bg="cream" />
     </>
   );
 }

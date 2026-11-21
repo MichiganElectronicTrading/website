@@ -141,22 +141,3 @@
   line-height: 1.6;
 }
 .start { align-self: flex-start; }
-
-.sponsorsHead {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-.sponsorsFoot {
-  max-width: 1200px;
-  margin: 32px auto 0;
-  padding: 0 24px;
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-}
