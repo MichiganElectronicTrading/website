@@ -23,16 +23,6 @@
   animation: marquee 30s linear infinite;
 }
 .rev { animation-direction: reverse; }
-
-/* Static row for short lists: tiles centred, no animation. */
-.still {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  padding: 0 24px;
-}
-.still .mq { margin-right: 0; }
 .marquee:hover .track { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {

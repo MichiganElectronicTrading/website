@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Section, { SectionLabel, numberSections } from "@/components/Section";
 import StageCards from "@/components/StageCards";
-import LogoMarquee from "@/components/LogoMarquee";
 import LiveChip from "@/components/LiveChip";
 import HomeJoin from "@/components/HomeJoin";
 import MetMark from "@/components/MetMark";
@@ -80,12 +79,6 @@ export default function Home() {
           <div className={styles.sponsorsHead}>
             <SectionLabel>{label.Sponsors}</SectionLabel>
           </div>
-          {/* Fewer than 4 sponsors sit in a static row; 4 or more scroll. */}
-          <LogoMarquee
-            label={allSponsors.length < 4 ? "Sponsor logos" : "Sponsor logos, auto-scrolling"}
-            rows={[{ logos: allSponsors, duration: 30 }]}
-            still={allSponsors.length < 4}
-          />
           <div className={styles.sponsorsFoot}>
             <Link href="/sponsors" className="btn">
               Become a Sponsor
