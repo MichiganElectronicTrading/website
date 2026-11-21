@@ -5,10 +5,11 @@
 
 .muted { color: #555; }
 
-/* Tiles fill cells from the left; a lone sponsor keeps one cell's width. */
+/* Tiles fill cells from the left; a lone sponsor keeps one cell's width.
+   Same 24px gap as the Why partner cards so tile edges line up with them. */
 .logos {
   display: grid;
-  gap: 16px;
+  gap: 24px;
 }
 .desk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .sponsor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -33,6 +34,12 @@
 .sponsor .logo img {
   width: 80%;
   height: 56%;
+}
+
+/* The Why partner cards (280px basis + padding) drop to two per row at this
+   width, so Sponsors does too and the columns keep lining up. */
+@media (max-width: 1112px) {
+  .sponsor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 767px) {
