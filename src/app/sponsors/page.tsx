@@ -31,14 +31,20 @@ export default function SponsorsPage() {
         <Section bg="cream" pad={72}>
           <SectionLabel>{label["Our sponsors"]}</SectionLabel>
           {sponsorTiers.map((tier) => (
-            <div key={tier.label} className={styles.tier}>
+            <div key={tier.key} className={styles.tier}>
               <div className={`lbl ${styles.muted}`}>{tier.label}</div>
-              <div className={styles.logos}>
+              <div className={`${styles.logos} ${tier.key === "desk" ? styles.desk : styles.sponsor}`}>
                 {tier.sponsors.map((s) => (
-                  <div key={s.logo} className={`${styles.logo} ${tier.size === "large" ? styles.large : styles.small}`}>
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.logo}
+                  >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={s.logo} alt={s.name} />
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

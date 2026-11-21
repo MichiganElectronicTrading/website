@@ -18,6 +18,8 @@ type Props = {
   label: string;
   /** Logos are drawn to the tile's shape, so show them edge to edge. */
   fill?: boolean;
+  /** Show each row once as a static, centred row of tiles instead of scrolling. */
+  still?: boolean;
 };
 
 /**
@@ -25,9 +27,30 @@ type Props = {
  * seamless; hovering pauses every row, and reduced motion stops them.
  * Repeated tiles are hidden from screen readers.
  */
-export default function LogoMarquee({ rows, label, fill }: Props) {
+export default function LogoMarquee({ rows, label, fill, still }: Props) {
   const visible = rows.filter((row) => row.logos.length > 0);
   if (visible.length === 0) return null;
+
+  if (still) {
+    return (
+      <div className={`${styles.marquee} ${visible.length > 1 ? styles.stack : ""}`} aria-label={label} data-reveal="unit">
+        {visible.map((row, i) => (
+          <div key={i} className={styles.still}>
+            {row.logos.map((firm, j) => (
+              <div key={j} className={`${styles.mq} ${fill && firm.logo ? styles.fit : ""}`}>
+                {firm.logo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={firm.logo} alt={firm.name} className={styles.img} />
+                ) : (
+                  <Placeholder label="[FIRM LOGO]" className={styles.ph} />
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div

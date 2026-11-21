@@ -80,7 +80,12 @@ export default function Home() {
           <div className={styles.sponsorsHead}>
             <SectionLabel>{label.Sponsors}</SectionLabel>
           </div>
-          <LogoMarquee label="Sponsor logos, auto-scrolling" rows={[{ logos: allSponsors, duration: 30 }]} />
+          {/* Fewer than 4 sponsors sit in a static row; 4 or more scroll. */}
+          <LogoMarquee
+            label={allSponsors.length < 4 ? "Sponsor logos" : "Sponsor logos, auto-scrolling"}
+            rows={[{ logos: allSponsors, duration: 30 }]}
+            still={allSponsors.length < 4}
+          />
           <div className={styles.sponsorsFoot}>
             <Link href="/sponsors" className="btn">
               Become a Sponsor

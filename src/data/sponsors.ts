@@ -1,30 +1,27 @@
 import { type FirmLogo, withoutPlaceholdersInProduction } from "./logos";
 
+export type Sponsor = FirmLogo & {
+  /** Sponsor's website; the /sponsors tile links here in a new tab. */
+  url?: string;
+};
+
 export type SponsorTier = {
+  key: "desk" | "sponsor";
+  /** Shown as the small label above the tier's logos. */
   label: string;
-  /** "large" = two per row (Tier 1), "small" = four per row (Tier 2). */
-  size: "large" | "small";
-  sponsors: FirmLogo[];
+  sponsors: Sponsor[];
 };
 
 const tiers: SponsorTier[] = [
   {
-    label: "[Tier 1]",
-    size: "large",
-    sponsors: [
-      { name: "Vantrel Capital", logo: "/logos/vantrel.svg", placeholder: true },
-      { name: "Orrin & Hale", logo: "/logos/orrin-hale.svg", placeholder: true },
-    ],
+    key: "desk",
+    label: "Desk Sponsors",
+    sponsors: [],
   },
   {
-    label: "[Tier 2]",
-    size: "small",
-    sponsors: [
-      { name: "Pinewire Trading", logo: "/logos/pinewire.svg", placeholder: true },
-      { name: "Lumabit", logo: "/logos/lumabit.svg", placeholder: true },
-      { name: "Arclane Markets", logo: "/logos/arclane.svg", placeholder: true },
-      { name: "Tessaline Systems", logo: "/logos/tessaline.svg", placeholder: true },
-    ],
+    key: "sponsor",
+    label: "Sponsors",
+    sponsors: [{ name: "Tradermath", logo: "/logos/tradermath.svg", url: "https://www.tradermath.org" }],
   },
 ];
 
@@ -34,7 +31,7 @@ export const sponsorTiers: SponsorTier[] = tiers
   .filter((tier) => tier.sponsors.length > 0);
 
 /** Every sponsor in tier order, used by the Home sponsor strip. */
-export const allSponsors: FirmLogo[] = sponsorTiers.flatMap((tier) => tier.sponsors);
+export const allSponsors: Sponsor[] = sponsorTiers.flatMap((tier) => tier.sponsors);
 
 export const whyPartner = [
   { n: "01", title: "Sponsored Desks", desc: "Back a desk and work with its members on a problem your firm cares about." },

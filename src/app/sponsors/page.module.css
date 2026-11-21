@@ -5,11 +5,13 @@
 
 .muted { color: #555; }
 
+/* Tiles fill cells from the left; a lone sponsor keeps one cell's width. */
 .logos {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 16px;
 }
+.desk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sponsor { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .logo {
   display: flex;
@@ -21,13 +23,22 @@
   box-sizing: border-box;
   min-width: 0;
 }
+.desk .logo { height: 140px; }
+.sponsor .logo { height: 128px; }
 .logo img {
   width: 84%;
   height: 62%;
   object-fit: contain;
 }
-.large { flex: 1 1 360px; height: 140px; }
-.small { flex: 1 1 200px; height: 96px; }
+.sponsor .logo img {
+  width: 80%;
+  height: 56%;
+}
+
+@media (max-width: 767px) {
+  .desk { grid-template-columns: minmax(0, 1fr); }
+  .sponsor { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 .why {
   display: flex;
