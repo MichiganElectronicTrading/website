@@ -20,7 +20,7 @@ export type DeskHead = {
   linkedin?: string;
 };
 
-/** `desk` is optional; members without one show just their track. `advisor` shows as "Advisor + <track>". */
+/** `desk` is optional; members without one show just their track. `advisor` adds an italic "Advisor" line under the name. */
 export type Member = { name: string; track: Track; advisor?: boolean; desk?: string; photo?: string; linkedin?: string };
 
 export const board: BoardMember[] = [

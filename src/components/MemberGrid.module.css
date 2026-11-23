@@ -31,7 +31,7 @@
   outline: 2px solid #fff;
   outline-offset: -4px;
 }
-.photoLink ~ .name,
+.photoLink ~ .top,
 .photoLink ~ .info {
   pointer-events: none;
 }
@@ -51,16 +51,18 @@
   color: #4a4a46;
 }
 
-.name {
+/* Name, plus an optional italic role line right under it. */
+.top {
   position: absolute;
   top: 14px;
   left: 14px;
   right: 14px;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
   text-align: right;
   color: #fff;
-  font-size: 17px;
-  font-weight: 700;
   /* Very faint black outline so names stay readable on light photos. */
   text-shadow:
     -1px -1px 0 rgba(0, 0, 0, 0.35),
@@ -68,6 +70,15 @@
     -1px 1px 0 rgba(0, 0, 0, 0.35),
     1px 1px 0 rgba(0, 0, 0, 0.35),
     0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.name {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+.role {
+  font-size: 15px;
+  font-style: italic;
 }
 
 .info {
