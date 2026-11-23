@@ -13,6 +13,7 @@ import { useEffect } from "react";
  *
  * Opt out on any element (and its contents) with data-reveal="off".
  * Force an element to fade as one block with data-reveal="unit".
+ * Mark a filterable grid with data-reveal-grid so it counts as a grid at any size.
  * Hold an element back with data-reveal-delay="200" (ms, added to any stagger).
  *
  * Elements are only hidden once this script runs. The inline script in the
@@ -54,13 +55,15 @@ const hasOwnText = (el: Element) =>
   Array.from(el.childNodes).some((n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim());
 
 const isUnit = (el: Element) =>
-  el.getAttribute("data-reveal") === "unit" ||
+  !el.hasAttribute("data-reveal-grid") &&
+  (el.getAttribute("data-reveal") === "unit" ||
   UNIT_TAGS.has(el.tagName.toUpperCase()) ||
   el.children.length === 0 ||
-  hasOwnText(el);
+  hasOwnText(el));
 
 /** Two or more children that are all the same kind of card or list item. */
 function isGrid(el: Element) {
+  if (el.hasAttribute("data-reveal-grid")) return true;
   const kids = Array.from(el.children);
   if (kids.length < 2) return false;
   const tag = kids[0].tagName;

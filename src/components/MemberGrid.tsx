@@ -15,7 +15,7 @@ export default function MemberGrid() {
   return (
     <>
       <FilterButtons label="Filter members" options={FILTERS} value={filter} onChange={setFilter} />
-      <div className={styles.grid}>
+      <div className={styles.grid} data-reveal-grid>
         {/* Keyed by filter so every switch rebuilds the grid and the cards fade in left to right. */}
         {shown.map((m) => (
           <article key={`${filter}-${m.name}`} className={styles.card}>

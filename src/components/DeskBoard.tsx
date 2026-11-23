@@ -16,9 +16,10 @@ export default function DeskBoard() {
   return (
     <>
       <FilterButtons label="Filter desks" options={FILTERS} value={filter} onChange={setFilter} />
-      <div className={styles.grid}>
-        {shown.map((desk, i) => (
-          <article key={i} className={styles.card}>
+      <div className={styles.grid} data-reveal-grid>
+        {/* Keyed by filter so every switch rebuilds the grid and the cards fade in left to right. */}
+        {shown.map((desk) => (
+          <article key={`${filter}-${desk.name}`} className={styles.card}>
             {desk.image ? (
               <div className={`${styles.visual} ${styles.photo}`}>
                 <Image src={desk.image} alt="" fill sizes="(min-width: 1200px) 384px, 100vw" className={styles.photoImg} />
