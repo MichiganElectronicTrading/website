@@ -36,7 +36,10 @@ export default function DeskBoard() {
               </div>
               {desk.summary && <p>{desk.summary}</p>}
               <div className={`lbl ${styles.meta}`}>
-                <span>Desk Head: {desk.head}</span>
+                <span>
+                  {Array.isArray(desk.head) && desk.head.length > 1 ? "Desk Heads" : "Desk Head"}:{" "}
+                  {[desk.head].flat().join(" & ")}
+                </span>
               </div>
             </div>
           </article>

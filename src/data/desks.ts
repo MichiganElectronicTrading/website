@@ -14,7 +14,8 @@ export type Desk = {
   stage: DeskStage;
   /** One or two lines on the strategy or project. Leave out until written. */
   summary?: string;
-  head: string;
+  /** One name, or several for a desk with more than one head. */
+  head: string | string[];
   /** Card image under /public. Leave out to show the placeholder box. */
   image?: string;
 };
@@ -52,5 +53,11 @@ export const desks: Desk[] = [
     stage: "Trading",
     head: "Mihir Epel",
     image: "/desk-sports-prediction.jpg",
+  },
+  {
+    name: "Weather Markets",
+    stage: "Research",
+    head: ["Aman Patel", "Santiago Caravia Perry"],
+    image: "/desk-weather-markets.jpg",
   },
 ];
