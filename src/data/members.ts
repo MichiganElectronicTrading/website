@@ -53,10 +53,16 @@ export const board: BoardMember[] = [
 
 export const deskHeads: DeskHead[] = [
   {
-    name: "John Colyer",
-    desk: "Systematic Biotech",
-    photo: "/headshot-john-colyer.jpg",
-    linkedin: "https://www.linkedin.com/in/john-colyer/",
+    name: "Aman Patel",
+    desk: "Weather Markets",
+    photo: "/headshot-aman-patel.jpg",
+    linkedin: "https://www.linkedin.com/in/aman-patel-3b0b5b361/",
+  },
+  {
+    name: "Santiago Caravia Perry",
+    desk: "Weather Markets",
+    photo: "/headshot-santiago-caravia-perry.jpg",
+    linkedin: "https://www.linkedin.com/in/santiagocaravia/",
   },
 ];
 
@@ -66,12 +72,6 @@ const memberList: Member[] = [
     track: "Engineering",
     photo: "/headshot-avi-goldschmidt.jpg",
     linkedin: "https://www.linkedin.com/in/avi-goldschmidt/",
-  },
-  {
-    name: "Aman Patel",
-    track: "Trading",
-    photo: "/headshot-aman-patel.jpg",
-    linkedin: "https://www.linkedin.com/in/aman-patel-3b0b5b361/",
   },
   {
     name: "Dhruv Aron",
@@ -86,10 +86,10 @@ const memberList: Member[] = [
     linkedin: "https://www.linkedin.com/in/kelly-bae-01bb3a43a/",
   },
   {
-    name: "Santiago Caravia Perry",
+    name: "John Colyer",
     track: "Trading",
-    photo: "/headshot-santiago-caravia-perry.jpg",
-    linkedin: "https://www.linkedin.com/in/santiagocaravia/",
+    photo: "/headshot-john-colyer.jpg",
+    linkedin: "https://www.linkedin.com/in/john-colyer/",
   },
   {
     name: "Sabine Castro",
