@@ -31,6 +31,9 @@ export const REVEAL = {
   staggerStep: 70,
   /** Items after this index share its delay (index 5 = the 6th item). */
   staggerCap: 5,
+  /** Cards a filter swaps into an existing grid: same fade-up, quicker, left to right. */
+  filterFade: 250,
+  filterStaggerStep: 30,
   /** Section label text scramble. */
   scrambleDuration: 400,
   /** Rule line next to the label. Starts as the scramble finishes. */
@@ -88,6 +91,8 @@ export default function Reveal() {
 
     const seenRoots = new WeakSet<Element>();
     const grids = new WeakSet<Element>();
+    /** Items added to a grid after load (filter changes); they use the quick timings. */
+    const filtered = new WeakSet<Element>();
     const timers = new Set<number>();
     const frames = new Set<number>();
 
@@ -95,6 +100,7 @@ export default function Reveal() {
       el.removeAttribute("data-reveal-state");
       el.removeAttribute("data-reveal-anim");
       (el as HTMLElement).style.removeProperty("--reveal-delay");
+      (el as HTMLElement).style.removeProperty("--reveal-fade");
     };
     const later = (fn: () => void, ms: number) => {
       const id = window.setTimeout(() => {
@@ -137,9 +143,12 @@ export default function Reveal() {
         return;
       }
       delay += Number(el.getAttribute("data-reveal-delay")) || 0;
+      const quick = filtered.has(el);
+      const fade = quick ? REVEAL.filterFade : REVEAL.fadeDuration;
       (el as HTMLElement).style.setProperty("--reveal-delay", `${delay}ms`);
+      if (quick) (el as HTMLElement).style.setProperty("--reveal-fade", `${fade}ms`);
       el.setAttribute("data-reveal-state", "in");
-      later(() => clear(el), REVEAL.fadeDuration + delay + 50);
+      later(() => clear(el), fade + delay + 50);
     }
 
     const io = new IntersectionObserver(
@@ -204,14 +213,32 @@ export default function Reveal() {
     doc.classList.remove("reveal-pending");
 
     // New pages after client navigation, and cards added by filters.
+    // Cards a filter adds are on screen as soon as the button is clicked, so they play
+    // right away (no wait for the observer), staggered left to right.
     const mo = new MutationObserver((records) => {
+      const added: Element[] = [];
       for (const r of records) {
         for (const node of Array.from(r.addedNodes)) {
           if (!(node instanceof Element)) continue;
           if (node.closest('[data-reveal="off"]')) continue;
-          if (node.parentElement && grids.has(node.parentElement)) hide(node, "item");
+          if (node.parentElement && grids.has(node.parentElement)) added.push(node);
           else scan(node, true);
         }
+      }
+      if (added.length === 0) return;
+      added.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+      for (const el of added) {
+        filtered.add(el);
+        el.setAttribute("data-reveal-anim", "item");
+        el.setAttribute("data-reveal-state", "pending");
+      }
+      // Commit the hidden state so the fade has a starting point.
+      void (added[0] as HTMLElement).offsetWidth;
+      const counts = new Map<Element | null, number>();
+      for (const el of added) {
+        const n = counts.get(el.parentElement) ?? 0;
+        counts.set(el.parentElement, n + 1);
+        play(el, "item", n * REVEAL.filterStaggerStep);
       }
     });
     mo.observe(document.body, { childList: true, subtree: true });
